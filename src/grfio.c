@@ -4,11 +4,6 @@
  *--------------------------------------------------------------------
  *		special need library : zlib
  *********************************************************************
- *	2002/12/18 ... 原版
- *	2003/01/23 ... コード修正
- *	2003/02/01 ... LocalFile及び複数GRFチェック処理を追加,暗号解読処理を改良
- *	2003/02/02 ... grfが無くても止まらないように修正
- *	2003/02/02 ... grf読み込み指定を後から追加できるように修正(grfio_add関数追加)
  */
 
 #include <stdio.h>
@@ -16,6 +11,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <sys/stat.h>
+#include <strings.h> // ??????????? rindex
 
 #include <zlib.h>
 
@@ -100,6 +96,7 @@ static unsigned char NibbleData[4][64]={
 		0xa0, 0x9f, 0xf6, 0x5c, 0x6a, 0x09, 0x8d, 0xf0,  0x0f, 0xe3, 0x53, 0x25, 0x95, 0x36, 0x28, 0xcb,
 	}
 };
+
 /*-----------------
  *	long data get
  */
@@ -119,47 +116,47 @@ static void NibbleSwap(BYTE *Src, int len)
 	}
 }
 
-static void BitConvert(BYTE *Src,char *BitSwapTable)
+static void BitConvert(BYTE *Src, char *BitSwapTable)
 {
-	int lop,prm;
-	BYTE tmp[8];
-	*(DWORD*)tmp=*(DWORD*)(tmp+4)=0;
+	int lop, prm;
+	BYTE tmp[8] = {0};
 	for(lop=0;lop!=64;lop++) {
 		prm = BitSwapTable[lop]-1;
 		if (Src[(prm >> 3) & 7] & BitMaskTable[prm & 7]) {
 			tmp[(lop >> 3) & 7] |= BitMaskTable[lop & 7];
 		}
 	}
-	*(DWORD*)Src     = *(DWORD*)tmp;
-	*(DWORD*)(Src+4) = *(DWORD*)(tmp+4);
+	memcpy(Src, tmp, 8); // ??????????????????????? DWORD
 }
 
 static void BitConvert4(BYTE *Src)
 {
-	int lop,prm;
-	BYTE tmp[8];
-	tmp[0] = ((Src[7]<<5) | (Src[4]>>3)) & 0x3f;	// ..0 vutsr
-	tmp[1] = ((Src[4]<<1) | (Src[5]>>7)) & 0x3f;	// ..srqpo n
-	tmp[2] = ((Src[4]<<5) | (Src[5]>>3)) & 0x3f;	// ..o nmlkj
-	tmp[3] = ((Src[5]<<1) | (Src[6]>>7)) & 0x3f;	// ..kjihg f
-	tmp[4] = ((Src[5]<<5) | (Src[6]>>3)) & 0x3f;	// ..g fedcb
-	tmp[5] = ((Src[6]<<1) | (Src[7]>>7)) & 0x3f;	// ..cba98 7
-	tmp[6] = ((Src[6]<<5) | (Src[7]>>3)) & 0x3f;	// ..8 76543
-	tmp[7] = ((Src[7]<<1) | (Src[4]>>7)) & 0x3f;	// ..43210 v
+	int lop, prm;
+	BYTE tmp[8] = {0};
+	tmp[0] = ((Src[7]<<5) | (Src[4]>>3)) & 0x3f;
+	tmp[1] = ((Src[4]<<1) | (Src[5]>>7)) & 0x3f;
+	tmp[2] = ((Src[4]<<5) | (Src[5]>>3)) & 0x3f;
+	tmp[3] = ((Src[5]<<1) | (Src[6]>>7)) & 0x3f;
+	tmp[4] = ((Src[5]<<5) | (Src[6]>>3)) & 0x3f;
+	tmp[5] = ((Src[6]<<1) | (Src[7]>>7)) & 0x3f;
+	tmp[6] = ((Src[6]<<5) | (Src[7]>>3)) & 0x3f;
+	tmp[7] = ((Src[7]<<1) | (Src[4]>>7)) & 0x3f;
 
 	for(lop=0;lop!=4;lop++) {
 		tmp[lop] = (NibbleData[lop][tmp[lop*2]] & 0xf0)
 		         | (NibbleData[lop][tmp[lop*2+1]] & 0x0f);
 	}
 
-	*(DWORD*)(tmp+4)=0;
+	// ??????????????????????
+	memset(tmp + 4, 0, 4);
 	for(lop=0;lop!=32;lop++) {
 		prm = BitSwapTable3[lop]-1;
 		if (tmp[prm >> 3] & BitMaskTable[prm & 7]) {
 			tmp[(lop >> 3) + 4] |= BitMaskTable[lop & 7];
 		}
 	}
-	*(DWORD*)Src ^= *(DWORD*)(tmp+4);
+
+	for(lop=0; lop<4; lop++) Src[lop] ^= tmp[lop+4];
 }
 
 static void decode_des_etc(BYTE *buf,int len,int type,int cycle)
@@ -179,8 +176,7 @@ static void decode_des_etc(BYTE *buf,int len,int type,int cycle)
 			if(cnt==7 && type==0){
 				int a;
 				BYTE tmp[8];
-				*(DWORD*)tmp     = *(DWORD*)buf;
-				*(DWORD*)(tmp+4) = *(DWORD*)(buf+4);
+				memcpy(tmp, buf, 8);
 				cnt=0;
 				buf[0]=tmp[3];
 				buf[1]=tmp[4];
@@ -210,10 +206,7 @@ static void decode_des_etc(BYTE *buf,int len,int type,int cycle)
 		}
 	}
 }
-/*==========================================
- *	Grf Data Decode Sub : zip
- *------------------------------------------
- */
+
 static int decode_zip(Bytef* dest, uLongf* destLen, const Bytef* source, uLong sourceLen)
 {
 	z_stream stream;
@@ -221,7 +214,6 @@ static int decode_zip(Bytef* dest, uLongf* destLen, const Bytef* source, uLong s
 
 	stream.next_in = (Bytef*)source;
 	stream.avail_in = (uInt)sourceLen;
-	/* Check for source > 64K on 16-bit machine: */
 	if ((uLong)stream.avail_in != sourceLen) return Z_BUF_ERROR;
 
 	stream.next_out = dest;
@@ -245,10 +237,6 @@ static int decode_zip(Bytef* dest, uLongf* destLen, const Bytef* source, uLong s
 	return err;
 }
 
-/*==========================================
- *	File List Sub : Hash make
- *------------------------------------------
- */
 static int filehash(unsigned char *fname)
 {
 	unsigned int hash=0;
@@ -259,10 +247,6 @@ static int filehash(unsigned char *fname)
 	return hash & 255;
 }
 
-/*==========================================
- *	File List Sub : Hash Initalize
- *------------------------------------------
- */
 static void hashinit(void)
 {
 	int lop;
@@ -270,30 +254,19 @@ static void hashinit(void)
 		filelist_hash[lop]=-1;
 }
 
-/*==========================================
- *	File List Sub : File Find
- *------------------------------------------
- */
 FILELIST *filelist_find(char *fname)
 {
 	int hash;
-
-	for(hash=filelist_hash[filehash(fname)];hash>=0;hash=filelist[hash].next) {
+	for(hash=filelist_hash[filehash((unsigned char *)fname)];hash>=0;hash=filelist[hash].next) {
 		if(strcasecmp(filelist[hash].fn,fname)==0)
 			break;
 	}
-
 	return (hash>=0)? &filelist[hash] : NULL;
 }
 
-/*==========================================
- *	File List Sub : filelist add
- *------------------------------------------
- */
 static FILELIST* filelist_add(FILELIST *entry)
 {
 	int hash;
-
 	if (filelist_entrys>=filelist_maxentry) {
 		FILELIST *new_filelist = (FILELIST*)realloc((void*)filelist,(filelist_maxentry+1024)*sizeof(FILELIST));
 		if (new_filelist!=NULL) {
@@ -306,11 +279,9 @@ static FILELIST* filelist_add(FILELIST *entry)
 	}
 
 	memcpy( &filelist[filelist_entrys], entry, sizeof(FILELIST) );
-
-	hash = filehash(entry->fn);
+	hash = filehash((unsigned char *)entry->fn);
 	filelist[filelist_entrys].next = filelist_hash[hash];
 	filelist_hash[hash] = filelist_entrys;
-
 	filelist_entrys++;
 
 	return &filelist[filelist_entrys-1];
@@ -328,28 +299,24 @@ static FILELIST* filelist_modify(FILELIST *entry)
 	}
 	return fentry;
 }
-/*==========================================
- *	File List Sub : Size Get
- *------------------------------------------
- */
+
 int grfio_size(char *fname)
 {
 	FILELIST *entry;
-
 	entry = filelist_find(fname);
 
-	if (entry==NULL || entry->gentry<0) {	// LocalFileCheck
+	if (entry==NULL || entry->gentry<0) {
 		char lfname[256],*p;
 		FILELIST lentry;
 		struct stat st;
 
 		strncpy(lfname,fname,255);
-		for(p=&lfname[0];*p!=0;p++) if (*p=='\\') *p = '/';	// ※Unix時のみ
+		for(p=&lfname[0];*p!=0;p++) if (*p=='\\') *p = '/';
 
 		if (stat(lfname,&st)==0) {
 			strcpy(lentry.fn, fname);
 			lentry.declen = st.st_size;
-			lentry.gentry = 0;	// 0:LocalFile
+			lentry.gentry = 0;
 			entry = filelist_modify(&lentry);
 		} else if (entry==NULL) {
 			printf("%s not found\n", fname);
@@ -359,10 +326,6 @@ int grfio_size(char *fname)
 	return entry->declen;
 }
 
-/*==========================================
- *	File List Sub : File Read
- *------------------------------------------
- */
 static void filelist_adjust(void)
 {
 	if (filelist!=NULL) {
@@ -377,10 +340,6 @@ static void filelist_adjust(void)
 	}
 }
 
-/*==========================================
- *	File List Sub : File Read
- *------------------------------------------
- */
 void* grfio_read(char *fname)
 {
 	FILE *in;
@@ -390,22 +349,22 @@ void* grfio_read(char *fname)
 
 	entry = filelist_find(fname);
 
-	if (entry==NULL || entry->gentry<=0) {	// LocalFileCheck
+	if (entry==NULL || entry->gentry<=0) {
 		char lfname[256],*p;
 		FILELIST lentry;
 
 		strncpy(lfname,fname,255);
-		for(p=&lfname[0];*p!=0;p++) if (*p=='\\') *p = '/';	// ※Unix時のみ
+		for(p=&lfname[0];*p!=0;p++) if (*p=='\\') *p = '/';
 
 		in = fopen(lfname,"rb");
 		if(in!=NULL) {
 			if (entry!=NULL && entry->gentry==0) {
 				lentry.declen=entry->declen;
 			} else {
-				fseek(in,0,2);	// SEEK_END
+				fseek(in,0,SEEK_END);
 				lentry.declen = ftell(in);
 			}
-			fseek(in,0,0);	// SEEK_SET
+			fseek(in,0,SEEK_SET);
 			buf2 = malloc(lentry.declen+1024);
 			if (buf2==NULL) {
 				fclose(in);
@@ -415,18 +374,18 @@ void* grfio_read(char *fname)
 			fread(buf2,1,lentry.declen,in);
 			fclose(in);
 			strcpy(lentry.fn, fname);
-			lentry.gentry = 0;	// 0:LocalFile
+			lentry.gentry = 0;
 			entry = filelist_modify(&lentry);
 		} else {
 			if (entry!=NULL && entry->gentry<0) {
-				entry->gentry = -entry->gentry;	// local file checked
+				entry->gentry = -entry->gentry;
 			} else {
 				printf("%s not found\n", fname);
 				exit(1);
 			}
 		}
 	}
-	if (entry!=NULL && entry->gentry>0) {	// Archive[GRF] File Read
+	if (entry!=NULL && entry->gentry>0) {
 		buf = malloc(entry->srclen_aligned+1024);
 		if (buf==NULL) {
 			printf("file read memory allocate error\n");
@@ -438,7 +397,7 @@ void* grfio_read(char *fname)
 			printf("%s not found\n",gfname);
 			exit(1);
 		}
-		fseek(in,entry->srcpos,0);
+		fseek(in,entry->srcpos,SEEK_SET);
 		fread(buf,1,entry->srclen_aligned,in);
 		fclose(in);
 		buf2=malloc(entry->declen+1024);
@@ -452,7 +411,7 @@ void* grfio_read(char *fname)
 			decode_des_etc(buf,entry->srclen_aligned,entry->cycle==0,entry->cycle);
 			len=entry->declen;
 			decode_zip(buf2,&len,buf,entry->srclen);
-			if(len!=entry->declen) {
+			if(len!= (uLong)entry->declen) {
 				printf("decode_zip size miss match err: %d != %d\n",(int)len,entry->declen);
 				exit(1);
 			}
@@ -464,10 +423,6 @@ void* grfio_read(char *fname)
 	return buf2;
 }
 
-/*==========================================
- *	File List Sub : Filename Decode
- *------------------------------------------
- */
 static unsigned char * decode_filename(unsigned char *buf,int len)
 {
 	int lop;
@@ -480,10 +435,6 @@ static unsigned char * decode_filename(unsigned char *buf,int len)
 	return buf;
 }
 
-/*==========================================
- * Grfio Entry Read
- *------------------------------------------
- */
 static int grfio_entryread(char *gfname,int gentry)
 {
 	FILE *fp;
@@ -496,14 +447,14 @@ static int grfio_entryread(char *gfname,int gentry)
 	fp = fopen(gfname,"rb");
 	if(fp==NULL) {
 		printf("%s not found\n",gfname);
-		return 1;	// 1:not found err
+		return 1;
 	}
 
-	fseek(fp,0,2);	// SEEK_END
+	fseek(fp,0,SEEK_END);
 	grf_size = ftell(fp);
-	fseek(fp,0,0);	// SEEK_SET
+	fseek(fp,0,SEEK_SET);
 	fread(grf_header,1,0x2e,fp);
-	if(strcmp(grf_header,"Master of Magic") || fseek(fp,getlong(grf_header+0x1e),1)){	// SEEK_CUR
+	if(strcmp((char *)grf_header,"Master of Magic") || fseek(fp,getlong(grf_header+0x1e),SEEK_CUR)){
 		printf("%s read error\n",gfname);
 		exit(2);
 	}
@@ -517,7 +468,6 @@ static int grfio_entryread(char *gfname,int gentry)
 	fread(grf_filelist,1,list_size,fp);
 	fclose(fp);
 
-	// エントリー数検索
 	for(lop=0,num=0;lop<list_size;lop+=21+getlong(grf_filelist+lop))
 		if(grf_filelist[lop+getlong(grf_filelist+lop)+16]) num++;
 
@@ -526,17 +476,17 @@ static int grfio_entryread(char *gfname,int gentry)
 		char *period_ptr;
 		FILELIST aentry;
 		ofs2 = ofs+getlong(grf_filelist+ofs)+4;
-		if(grf_filelist[ofs2+12]==0){	// Directory Index ... skip
+		if(grf_filelist[ofs2+12]==0){
 			entry--;
 			continue;
 		}
 		fname = decode_filename(grf_filelist+ofs+6,grf_filelist[ofs]-6);
-		if(strlen(fname)>=sizeof(filelist[entry].fn)-1){
+		if(strlen((char *)fname)>=sizeof(aentry.fn)-1){
 			printf("file name too long : %s\n",fname);
 			exit(1);
 		}
 		srclen=0;
-		if((period_ptr=rindex(fname,'.'))!=NULL){
+		if((period_ptr=rindex((char *)fname,'.'))!=NULL){
 			for(lop=0;lop<4;lop++) {
 				if(strcasecmp(period_ptr,".gnd\0.gat\0.act\0.str"+lop*5)==0)
 					break;
@@ -557,26 +507,21 @@ static int grfio_entryread(char *gfname,int gentry)
 		aentry.srcpos         = getlong(grf_filelist+ofs2+13)+0x2e;
 		aentry.cycle          = srccount;
 		aentry.type           = grf_filelist[ofs2+12];
-		strcpy(aentry.fn,fname);
-		aentry.gentry         = -(gentry+1);	// 負数にするのは初回LocalFileCheckをさせるためのFlagとして
+		strcpy(aentry.fn, (char *)fname);
+		aentry.gentry         = -(gentry+1);
 
 		filelist_modify(&aentry);
 	}
 	free(grf_filelist);
-	filelist_adjust();	// filelistの不要エリア解放
-
-	return 0;	// 0:noerr
+	filelist_adjust();
+	return 0;
 }
 
-/*==========================================
- * Grfio Resource Check
- *------------------------------------------
- */
 static void grfio_resourcecheck()
 {
 	int lop,lopext,size;
 	unsigned char *buf,*ptr;
-	char w1[256],w2[256],src[256],dst[256];
+	char w1[256],w2[256],src[512],dst[512];
 	FILELIST *entry;
 
 	size=grfio_size("data\\resnametable.txt");
@@ -585,39 +530,34 @@ static void grfio_resourcecheck()
 
 	lopext = filelist_entrys+1024;
 
-	for(lop=filelist_entrys,ptr=buf;lop<lopext && ptr-buf<size;lop++){
-		if(sscanf(ptr,"%[^#]#%[^#]#",w1,w2)==2){
+	for(lop=filelist_entrys,ptr=buf;lop<lopext && (int)(ptr-buf)<size;lop++){
+		if(sscanf((char *)ptr,"%[^#]#%[^#]#",w1,w2)==2){
 			if(strstr(w2,"bmp")){
-				sprintf(src,"data\\texture\\%s",w1);
-				sprintf(dst,"data\\texture\\%s",w2);
+				snprintf(src,sizeof(src),"data\\texture\\%s",w1);
+				snprintf(dst,sizeof(dst),"data\\texture\\%s",w2);
 			} else {
-				sprintf(src,"data\\%s",w1);
-				sprintf(dst,"data\\%s",w2);
+				snprintf(src,sizeof(src),"data\\%s",w1);
+				snprintf(dst,sizeof(dst),"data\\%s",w2);
 			}
 
 			entry = filelist_find(dst);
 			if (entry!=NULL) {
 				FILELIST fentry;
 				memcpy( &fentry, entry, sizeof(FILELIST) );
-				strcpy( fentry.fn ,src );
+				strncpy( fentry.fn ,src, sizeof(fentry.fn)-1 );
 				filelist_add(&fentry);
 			} else {
-				//printf("file not found in data.grf : %s < %s\n",dst,src);
 				lop--;
 			}
 		}
-		ptr = strchr(ptr,'\n');
+		ptr = (unsigned char *)strchr((char *)ptr,'\n');
 		if (!ptr) break;
 		ptr++;
 	}
 	free(buf);
-	filelist_adjust();	// filelistの不要エリア解放
+	filelist_adjust();
 }
 
-/*==========================================
- * Grfio Resource Add
- *------------------------------------------
- */
 int grfio_add(char *fname)
 {
 	int len,result;
@@ -648,23 +588,15 @@ int grfio_add(char *fname)
 	gentry_table[gentry_entrys++] = buf;
 
 	result = grfio_entryread(fname,gentry_entrys-1);
-
 	if (result==0) {
-		// リソースチェック
 		grfio_resourcecheck();
 	}
-
 	return result;
 }
 
-/*==========================================
- * Grfio Finalize
- *------------------------------------------
- */
 void grfio_final(void)
 {
 	int lop;
-
 	if (filelist!=NULL)	free(filelist);
 	filelist = NULL;
 	filelist_entrys = filelist_maxentry = 0;
@@ -681,33 +613,18 @@ void grfio_final(void)
 	gentry_entrys = gentry_maxentry = 0; 
 }
 
-/*==========================================
- * Grfio Initialize
- *------------------------------------------
- */
 void grfio_init(void)
 {
-	// ADDED ON 03/31/2003 -----------------
 	FILE *data_cnf;
 	char data_file[500] = "data.grf";
 	char sdata_file[500] = "sdata.grf";
 	char line[500], w1[500], w2[500];
-	// END ---------------------------------
 
-
-
-	hashinit();	// hashテーブル初期化
-
+	hashinit();
 	filelist = NULL;     filelist_entrys = filelist_maxentry = 0;
 	gentry_table = NULL; gentry_entrys = gentry_maxentry = 0; 
-	atexit(grfio_final);	// 終了処理定義
+	atexit(grfio_final);
 
-
-
-
-	// ADDED AND CHANGED ON 03/31/2003 -----------------------
-	// NEW STUFF - GIVE grfio_add FUNCTION WHERE data.grf AND
-	//             sdata.grf ARE, ACCORDING TO data_athena.cnf
 	data_cnf = fopen("grf-files.txt","r");
 	if(data_cnf != NULL)
 	{
@@ -726,12 +643,9 @@ void grfio_init(void)
 				}
 			}
       	}
+		fclose(data_cnf);
 	}
-	fclose(data_cnf);
 	
-
-	// エントリーテーブル読込
-	grfio_add(data_file);	// Standard data file
-	grfio_add(sdata_file);	// Sakray addon data file
-	// END -----------------------------------------------------
+	grfio_add(data_file);
+	grfio_add(sdata_file);
 }
