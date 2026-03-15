@@ -19,7 +19,7 @@ int pet_init(struct map_session_data *sd)
 		if((*id - *init_npc_id) < MAX_NPC_PER_MAP)
 		{
 			sd->status.pet.pet_id_as_npc = *id;
-			*id++;
+			(*id)++;
 			// pet_npc_id_on_mapは初期段階では-1
 			// （マップ上にまだ一度も表示されていないの意味)
 			// （マップが変わればまた-1にする)
