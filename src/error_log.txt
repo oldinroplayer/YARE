@@ -1,33 +1,14 @@
-core.c: In function ‘connect_client’:
-core.c:107:7: warning: variable ‘result’ set but not used [-Wunused-but-set-variable]
-  107 |   int result;
-      |       ^~~~~~
-core.c: In function ‘make_connection’:
-core.c:185:7: warning: variable ‘result’ set but not used [-Wunused-but-set-variable]
-  185 |   int result;
-      |       ^~~~~~
-In file included from map2.c:14:
 map2.c: In function ‘mmo_map_set00d7’:
-core.h:33:44: warning: pointer targets in passing argument 1 of ‘strcpy’ differ in signedness [-Wpointer-sign]
-   33 | #define WBUFP(p,pos) (((unsigned char*)(p))+pos)
-      |                      ~~~~~~~~~~~~~~~~~~~~~~^~~~~
-      |                                            |
-      |                                            unsigned char *
-map2.c:1442:10: note: in expansion of macro ‘WBUFP’
- 1442 |   strcpy(WBUFP(buf,17),temp_chat->title);  /* title */
-      |          ^~~~~
-In file included from map2.c:11:
-/usr/include/string.h:38:18: note: expected ‘char * restrict’ but argument is of type ‘unsigned char *’
-   38 | char    *strcpy (char *__restrict, const char *__restrict);
-      |                  ^
 map2.c:1442:33: warning: pointer targets in passing argument 2 of ‘strcpy’ differ in signedness [-Wpointer-sign]
  1442 |   strcpy(WBUFP(buf,17),temp_chat->title);  /* title */
       |                        ~~~~~~~~~^~~~~~~
       |                                 |
       |                                 unsigned char *
+In file included from map2.c:11:
 /usr/include/string.h:38:36: note: expected ‘const char * restrict’ but argument is of type ‘unsigned char *’
    38 | char    *strcpy (char *__restrict, const char *__restrict);
       |                                    ^
+In file included from map2.c:14:
 map2.c: In function ‘mmo_map_sendwis’:
 core.h:14:66: warning: pointer targets in passing argument 2 of ‘strcmp’ differ in signedness [-Wpointer-sign]
    14 | #define RFIFOP(fd,pos) (session[fd]->rdata+session[fd]->rdata_pos+pos)
@@ -1432,32 +1413,6 @@ grfio.c: In function ‘grfio_add’:
 grfio.c:125:14: note: at offset 4 into object ‘tmp’ of size 8
   125 |         BYTE tmp[8];
       |              ^~~
-In file included from npc.c:6:
-npc.c: In function ‘mmo_map_npc_say’:
-core.h:33:44: warning: pointer targets in passing argument 1 of ‘strncpy’ differ in signedness [-Wpointer-sign]
-   33 | #define WBUFP(p,pos) (((unsigned char*)(p))+pos)
-      |                      ~~~~~~~~~~~~~~~~~~~~~~^~~~~
-      |                                            |
-      |                                            unsigned char *
-npc.c:33:11: note: in expansion of macro ‘WBUFP’
-   33 |   strncpy(WBUFP(buf,8), string,strlen(string)+1);
-      |           ^~~~~
-In file included from npc.c:1:
-/usr/include/string.h:44:19: note: expected ‘char * restrict’ but argument is of type ‘unsigned char *’
-   44 | char    *strncpy (char *__restrict, const char *__restrict, size_t);
-      |                   ^
-npc.c: In function ‘mmo_map_npc_select’:
-core.h:33:44: warning: pointer targets in passing argument 1 of ‘strncpy’ differ in signedness [-Wpointer-sign]
-   33 | #define WBUFP(p,pos) (((unsigned char*)(p))+pos)
-      |                      ~~~~~~~~~~~~~~~~~~~~~~^~~~~
-      |                                            |
-      |                                            unsigned char *
-npc.c:56:11: note: in expansion of macro ‘WBUFP’
-   56 |   strncpy(WBUFP(buf,8), string, strlen(string)+1);
-      |           ^~~~~
-/usr/include/string.h:44:19: note: expected ‘char * restrict’ but argument is of type ‘unsigned char *’
-   44 | char    *strncpy (char *__restrict, const char *__restrict, size_t);
-      |                   ^
 npc.c: In function ‘mons_walk’:
 npc.c:394:52: warning: pointer targets in passing argument 4 of ‘mmo_map_sendblock’ differ in signedness [-Wpointer-sign]
   394 |           mmo_map_sendblock(m,bx-dx*AREA_SIZE,by+i,buf,packet_len_table[0x80],0,0);

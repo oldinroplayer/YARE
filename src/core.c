@@ -137,6 +137,10 @@ int connect_client(int listen_fd)
   session[fd]->client_addr=client_address;
 
   //printf("new_session : %d %d\n",fd,session[fd]->eof);
+  
+  if(result == -1) {
+	perror("fcntl F_SETFL failed");
+  }
   return fd;
 }
 
@@ -210,6 +214,10 @@ int make_connection(long ip,int port)
   session[fd]->func_recv=recv_to_fifo;
   session[fd]->func_send=send_from_fifo;
   session[fd]->func_parse=default_func_parse;
+
+  if (result < 0) {
+	perror("setsockopt");
+  }
 
   return fd;
 }

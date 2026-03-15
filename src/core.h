@@ -30,7 +30,7 @@
 #define WFIFOW(fd,pos) (*(unsigned short*)(session[fd]->wdata+session[fd]->wdata_size+pos))
 #define WFIFOL(fd,pos) (*(unsigned int*)(session[fd]->wdata+session[fd]->wdata_size+pos))
 #define WFIFOSET(fd,len) (session[fd]->wdata_size = (session[fd]->wdata_size+len+2048 < session[fd]->max_wdata) ? session[fd]->wdata_size+len : session[fd]->wdata_size)
-#define WBUFP(p,pos) (((unsigned char*)(p))+pos)
+#define WBUFP(p,pos) ((void*)((char*)(p) + pos))
 #define WBUFB(p,pos) (*(unsigned char*)WBUFP(p,pos))
 #define WBUFW(p,pos) (*(unsigned short*)WBUFP(p,pos))
 #define WBUFL(p,pos) (*(unsigned int*)WBUFP(p,pos))

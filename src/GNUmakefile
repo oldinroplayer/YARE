@@ -30,3 +30,4 @@ pet.o: pet.c pet.h npc.h mmo.h
 
 clean:
 	rm -f *.o
+	rm -f *.exe
