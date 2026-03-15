@@ -1,0 +1,9 @@
+// When you want put the comment in these setting file
+// use dobule slash like this. (c) 2003 Athena Project.
+userid: admin
+passwd: admin
+server_name: Yare
+login_ip: 127.0.0.1
+login_port: 6900
+char_ip: 127.0.0.1
+char_port: 6121

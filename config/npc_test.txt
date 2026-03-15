@@ -1,0 +1,16 @@
+prontera.gat,156,185,2	script	見た目変更カプラさん	121,{
+	mes "[カプラさん]";
+	mes "どんな頭装備をしますか？";
+	next;
+	menu "サングラス",Lsa,"スイートジェントル",Lswe,"ウェスタングレイス",Lwes,"ロードカホの角",Lwiz;
+Lsa:	setlook 2201,1;
+	getitem 2201,1;
+	close;
+Lswe: 	setlook 2245,1;
+	getitem 2245,1;
+	close;
+Lwes:	setlook	2248,1;
+	close;
+Lwiz:	setlook 5013,1;
+	close;
+}

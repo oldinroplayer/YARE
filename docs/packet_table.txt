@@ -1,0 +1,706 @@
+詳しくは知りませんが、GMはアカウントID＝704554付近を指定すると
+クライアントがGMだと認識して表示するみたいです。
+数字が半端なのは気にしないで・・・
+
+パケット長リスト。-1はパケット種別の直後に長さがあるパケット
+   10,  0,  0,  0,  0,  0,  0,  0,   0,  0,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0,  0,  0,   0,  0,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0,  0,  0,   0,  0,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0,  0,  0,   0,  0,  0,  0,  0,  0,  0,  0,
+
+    0,  0,  0,  0,  0,  0,  0,  0,   0,  0,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0,  0,  0,   0,  0,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0, 55, 17,  3, 37,  46, -1, 23, -1,  3,108,  3,  2,
+    3, 28, 19, 11,  3, -1,  9,  5,  52, 51, 56, 58, 41,  2,  6,  6,
+
+    7,  3,  2,  2,  2,  5, 16, 12,  10,  7, 29, 23, -1, -1, -1,  0,
+    7, 22, 28,  2,  6, 30, -1, -1,   3, -1, -1,  5,  9, 17, 17,  6,
+   23,  6,  6, -1, -1, -1, -1,  8,   7,  6,  7,  4,  7,  0, -1,  6,
+    8,  8,  3,  3, -1,  6,  6, -1,   7,  6,  2,  5,  6, 44,  5,  3,
+
+    7,  2,  6,  8,  6,  7, -1, -1,  -1, -1,  3,  3,  6,  3,  2, 27,
+    3,  4,  4,  2, -1, -1,  3, -1,   6, 14,  3, -1, 28, 29, -1, -1,
+   30, 30, 26,  2,  6, 26,  3,  3,   8, 19,  5,  2,  3,  2,  2,  2,
+    3,  2,  6,  8, 21,  8,  8,  2,   2, 26,  3, -1,  6, 27, 30, 10,
+
+
+    2,  6,  6, 30, 79, 31, 10, 10,  -1, -1,  4,  6,  6,  2, 11, -1,
+   10, 39,  4, 10, 31, 35, 10, 18,   2, 13, 15, 20, 68,  2,  3, 16,
+    6, 14, -1, -1, 21,  8,  8,  8,   8,  8,  2,  2,  3,  4,  2, -1,
+    6, 86,  6, -1, -1,  7, -1,  6,   3, 16,  4,  4,  4,  6, 24, 26,
+
+   22, 14,  6, 10, 23, 19,  6, 39,   6,  7,  6, 27, -1,  2,  6,  6,
+  110,  6, -1, -1, -1, -1, -1,  6,  -1, 54, 66, 54, 90, 42,  6, 42,
+   -1, -1, -1, -1, -1, 30, -1,  3,  14,  3, 30, 10, 43, 14,186,182,
+   14, 30, 10,  3, -1,  6,106, -1,   4,  5,  4, -1,  6,  7, -1, -1,
+
+    6,  3,106, 10, 10, 34,  0,  6,   8,  4,  4,  4, 29, -1, 10,  6,
+   90, 86, 24,  6, 30,102,  8,  4,   8,  4, 14, 10
+
+S クライアントから見て送信
+R クライアントから見て受信
+
+B バイト
+w ワード=2B
+l ロングワード=4B
+* 0個以上くりかえし
+
+S 0064 <version>.l <account name>.24B <password>.24B <version2>.B
+	アカウントID&パスワード送信
+S 0065 <account ID>.l <login ID1>.l <login ID2>.l ?.2B <sex>.B
+	キャラセレ鯖接続要求
+S 0066 <charactor number>.B
+	キャラクタ選択要求
+S 0067 <charactor name>.24B <param etc>.11B
+	キャラクタ作成要求
+S 0068 <charactor ID>.l <mail address>.40B
+	キャラクタ削除要求
+R 0069 <len>.w <login ID1>.l <account ID>.l <login ID2>.l ?.32B <sex>.B {<IP>.l <port>.w <server name>.20B <login users>.l ?.2B}.32B*
+	login成功&鯖情報
+R 006a <error No>.B
+	login失敗
+R 006b <len>.w <charactor select data>.106B*
+	キャラセレ鯖接続成功&キャラクタデータ
+	<charactor select data> = <charactor ID>.l <base exp>.l <zeny>.l <job exp>.l <job level>.l ?.8B <option>.l <karma>.l <manner>.l ?.2B <HP>.w <MaxHP>.w <SP>.w <MaxSP>.w <speed>.w <class>.w <hair>.w <weapon>.2w <base level>.w <skill point>.w <head_bottom>.w <sheild>.w <head option top>.w <head option mid>.w <hair color>.w ?.w <name>.24B <STR>.B <AGI>.B <VIT>.B <INT>.B <DEX>.B <LUK>.B <charactor number>.B ?.B
+R 006c <error No>.B
+	キャラクタ選択失敗
+R 006d <charactor select data>.106B
+	キャラクタ作成成功
+R 006e <error No>.B
+	キャラクタ作成失敗
+R 006f
+	キャラクタ削除成功
+R 0070 <error No>.B
+	キャラクタ削除失敗
+R 0071 <charactor ID>.l <map name>.16B <ip>.l <port>.w
+	キャラクタ選択成功&マップ名&ゲーム鯖IP/port
+S 0072 <account ID>.l <charactor ID>.l <login ID1>.l <login ID2>.l <sex>.b
+	ゲーム鯖接続要求
+R 0073 <server tick>.l <coordidate>.3B ?.2B
+	ゲーム鯖接続成功&サーバ側1ms時計&出現位置
+R 0078 <ID>.l <speed>.w ?.w ?.w <option>.w <class>.w <hair>.w <weapon>.w <head option bottom>.w <sheild>.w <head option top>.w <head option mid>.w <hair color>.w ?.w <head dir>.w <guild>.w ?.w ?.w <manner>.w <karma>.w ?.B <sex>.B <X_Y_dir>.3B ?.B ?.B <sit>.B
+	マップロード時&移動時用、向き付き用キャラ情報?
+R 0079 <ID>.l <speed>.w ?.w ?.w <option>.w <class>.w <hair>.w <weapon>.w <head option bottom>.w <sheild>.w <head option top>.w <head option mid>.w <hair color>.w ?.w <head dir>.w <guild>.w ?.w ?.w <manner>.w <karma>.w ?.B <sex>.B <X_Y_dir>.3B ?.B ?.B
+	テレポ等の表示範囲内沸きキャラ用、向き付き無しキャラ情報?
+R 007b <ID>.l <speed>.w ?.w ?.w <option>.w <class>.w <hair>.w <weapon>.w <head option bottom>.w <server tick>.l <sheild>.w <head option top>.w <head option mid>.w <hair color>.w ?.w <head dir>.w <guild>.w ?.w ?.w <manner>.w <karma>.w ?.B <sex>.B <X_Y_X_Y>.5B ?.B ?.B ?.B
+	表示範囲内キャラ移動情報
+R 007c <ID>.l <speed>.w ?.6w <class>.w ?.7w <X_Y>.3B ?.2B
+	NPC用表示範囲内キャラ情報
+S 007d
+	mapロード終り
+S 007e <client tick>.l
+	クライアント側1msタイマ送信
+R 007f <server tick>.l
+	サーバ側1msタイマ送信
+R 0080 <ID>.l <type>.B
+	type=00 キャラ消滅 (画面外移動。死体消滅等?)
+	type=01 キャラ死亡
+	type=02 キャラ消滅 (テレポ,蝿,蝶,logout等?)
+R 0081 <type>.B
+	type=03 speed hack
+	type=08 2重ログイン
+S 0085 <X_Y>.3B
+	移動要求
+R 0087 <server tick>.l <X_Y_X_Y>.5B ?.B
+	移動応答
+R 0088 <ID>.l <X>.w <Y>.w
+	移動途中停止
+S 0089 <target ID>.l <type>.B
+	type=00 targetを1回殴る
+	type=02 座る
+	type=03 立ち上る
+	type=07 targetを殴り続ける
+R 008a <src ID>.l <dst ID>.l <server tick>.l <src speed>.l <dst speed>.l <param1>.w <param2>.w <type>.B <param3>.w
+	type=00 param1=0 miss
+	type=00 param1:ダメージ(の合計?) param2:分割数 param3:アサシン2刀流逆手ダメージ
+		NPCからの攻撃の場合、param2,param3はゴミデータ
+		speedはPCの場合内部ASPDと一致
+	type=01 itemを拾う ID*2以外ゴミ
+	type=02 座る src ID以外ゴミ
+	type=03 立つ src ID以外ゴミ
+	type=08 複数攻撃
+	type=0a クリティカル
+	type=0b 完全回避
+R 008c <len>.w <str>.?B
+	通常発言送信。チャット中はチャット内発言用になる
+	先頭の"<nick> : "の部分はクライアント側で付ける事
+R 008d <len>.w <ID>.l <str>.?B
+	IDさんの発言受信。チャット中はチャット内発言用になる
+R 008e <len>.w <str>.?B
+	自分の発言受信。チャット中はチャット内発言用になる
+S 0090 <ID>.l <type?>.B
+	NPCに話しかける。typeは01しか見た事無し
+R 0091 <map name>.16B <X>.w <Y>.w
+	鯖内マップ間移動、テレポ,蝿等用
+R 0092 <map name>.16B <X>.w <Y>.w <IP>.l <port>.w
+	鯖間移動
+R 0093
+	8月中に1回だけ観測。謎
+S 0094 <ID>.l
+	IDのキャラ名等要求。0095か0195の返答があるはず
+R 0095 <ID>.l <nick>.24B
+	NPC,ギルド未所属PCの0094への返答
+	0193	<charID>.l で問い合わせて
+	0194	<charID>.l <name>.24B の応答で得てます。
+
+S 0096 <len>.w <nick>.24B <message>.?B
+	wis送信
+R 0097 <len>.w <nick>.24B <message>.?B
+	wis受信
+R 0098 <type>.B
+	type=00 wis送信成功
+	type=01 wis相手がloginしてない?
+	type=02 wis相手からignoreされてる?
+R 009a <len>.w <message>.?B
+	GMからの天の声
+S 009b <head dir>.w <dir>.B
+	体&頭の方向変更要求。クライアントへの応答は無い模様
+	dirは00～07で体の向き。00で北から反時計回りに45°単位で07まで
+	head dirは00,01,02で頭の向き。00で体と同じ、01が右、02が左
+R 009c <ID>.l <head dir>.w <dir>.B
+	IDの体&頭の方向変更
+R 009d <ID>.l <item ID>.w <identify flag>.B <X>.w <Y>.w <amount>.w <subX>.B <subY>.B
+	移動等で床アイテムが画面内に入ってきた時
+R 009e <ID>.l <item ID>.w <identify flag>.B <X>.w <Y>.w <subX>.B <subY>.B <amount>.w
+	item drop。何故か009dとマス目内位置&個数が入れ変っている
+S 009f <ID>.l
+	IDの床アイテムを拾う
+R 00a0 <index>.w <amount>.w <item ID>.w <identify flag>.B <attribute?>.B <refine>.B <card>.4w <equip type>.w <type>.B <fail>.B
+	fail=02 取得失敗?
+	fail=06 ルート権無し。取得失敗
+R 00a1 <ID>.l
+	IDの床アイテム消去
+S 00a2 <index>.w <amount>.w
+	所有アイテムを落す
+R 00a3 <len>.w {<index>.w <item ID>.w <type>.B <identify flag>.B <amount>.w ?.2B}.10B*
+	所有消耗品&収集品リスト
+R 00a4 <len>.w {<index>.w <item ID>.w <type>.B <identify flag>.B <equip type>.w <equip point>.w <attribute?>.B <refine>.B <card>.4w}.20B*
+	所有装備リスト
+R 00a5 <len>.w {<index>.w <item ID>.w <type>.B <identify flag>.B <amount>.w ?.2B}.10B*
+	カプラさんに預けてある消耗品&収集品リスト
+R 00a6 <len>.w {<index>.w <item ID>.w <type>.B <identify flag>.B <equip type>.w <equip point>.w <attribute?>.B <refine>.B <card>.4w}.20B*
+	カプラさんに預けてある装備リスト
+S 00a7 <index>.w <ID>.l
+	所持アイテムindexを使用する。IDは自分のみ?
+R 00a8 <index>.w <amount>.w <type>.B
+	アイテム使用応答。type=00の場合使用失敗? amountもゴミの模様
+	type=01の場合成功で、amountは使用後の残り個数
+S 00a9 <index>.w <equip type>.w
+	アイテム装備
+R 00aa <index>.w <equip point>.w <type>.B
+	アイテム装備応答。type=00の場合装備失敗? equip pointもゴミの模様
+S 00ab <index>.w
+	装備解除
+R 00ac <index>.w <equip point>.w <type>.B
+	装備解除応答。type=00の場合失敗? equip pointもゴミの模様
+R 00af <index>.w <amount>.w
+	アイテム数減少。amount個だけ減らす
+R 00b0 <type>.w <val>.l
+	色々な能力値の更新。以下type:対応する数値を列挙
+	0000:speed 0003:悪行値 0004:マナーポイント 0005:HP 0006:MaxHP
+	0007:SP 0008:MaxSP 0009:ステータスポイント 000b:ベースレベル
+	000c:スキルポイント 0018:重量(表示されてる数字の10倍)
+	0019:最大重量(表示されてる数字の10倍)
+	0029:ATK前 002a:ATK後 002b:MATK前 002c:MATK後
+	002d:DEF前 002e:DEF後 002f:MDEF前 0030:MDEF後
+	0031:HIT 0032:FLEE前 0033:FLEE後 0034:クリティカル
+	0035:ASPD(2ms単位の時間?) 0037:ジョブレベル
+	0082:謎 ATK後と同じ数字?
+R 00b1 <type>.w <val>.l
+	色々な能力値の更新。以下type:対応する数値を列挙
+	0001:ベース側経験値 0002:ジョブ側経験値	0014:zeny
+	0016:ベース側必要経験値 0017:ジョブ側必要経験値
+	β1では00b0はvalがshort、00b1はvalがlongという使い分けがあったんだけど
+	今となっては差が無くなって、盲腸みたいなもの?
+S 00b2 <type>.B
+	type=00 死亡時リスタート
+	type=01 キャラセレ要求
+R 00b3 <type>.B
+	type=01 キャラセレ応答
+R 00b4 <len>.w <ID>.l <str>.?B
+	IDのNPCからのメッセージ
+R 00b5 <ID>.l
+	IDのNPCとのメッセージウィンドウに"NEXT"アイコンを出す
+R 00b6 <ID>.l
+	IDのNPCとのメッセージウィンドウに"CLOSE"アイコンを出す
+R 00b7 <len>.w <ID>.l <str>.?B
+	IDのNPCの会話で選択項目表示。各項目は':'で区切られる
+S 00b8 <ID>.l <select>.B
+	IDのNPCの会話の選択。各項目に順に1～が振られる。ffでキャンセル?
+S 00b9 <ID>.l
+	IDのNPCとの会話。NEXTボタンを押した
+S 00bb <type>.w <amount>.B
+	ステータスup要求。typeは000dから0012が順にSTR,AGI,VIT,INT,DEX,LUKに対応
+R 00bc <type>.w <fail>.B <val>.B
+	ステータスup応答。fail=01なら成功。typeは00bbと同じ。valは上った後の数字
+	失敗例は見た事無いので謎。ステータスポイントが足りない状態で
+	00bbを発行できるクライアントが有れば、fail=00になるのではないかと予想
+R 00bd <status point>.w <STR>.B <STRupP>.B <AGI>.B <AGIupP>.B <VIT>.B <VITupP>.B <INT>.B <INTupP>.B <DEX>.B <DEXupP>.B <LUK>.B <LUKupP>.B <ATK>.w <ATKbonus>.w <MATKmax>.w <MATKmin>.w <DEF>.w <DEFbonus>.w <MDEF>.w <MDEFbonus>.w <HIT>.w <FLEE>.w <FLEEbonus>.w <critical>.w ?.w
+	まとめてステータス情報を送るパケット
+R 00be <type>.w <val>.B
+	必要ステータスポイント更新パケット。typeは0020～0025が順にSTR～LUKに対応
+S 00bf <type>.B
+	エモーションを出す。typeは00-0c(,0d)がALT+1～ALT+9,ALT+0,チョキ,グー,パー(,韓国旗)に対応
+R 00c0 <ID>.l <type>.B
+	IDの人がエモーションを出した。typeは00bfと同じ
+S 00c1
+	login人数問い合わせ
+R 00c2 <val>.l
+	login人数応答
+R 00c3 <ID>.l <type>.B <val>.B
+	見た目変更。typeは00で本体(転職時等)、02が武器、03が頭(下)、04が頭(上)、05が頭(中)、08が盾
+R 00c4 <ID>.l
+	話かけたNPCが商人だったのでbuy/sell選択窓出
+R 00c5 <ID>.l <type>.B
+	buy/sell選択。type=00ならbuy。type=01ならsell
+R 00c6 <len>.w {<value>.l <DCvalue>.l <type>.B <item ID>.w}.11B*
+	NPCのお店buy選択時。DCvalueは商人DC後の値段
+R 00c7 <len>.w {<index>.w <value>.l <OCvalue>.l}.10B*
+	NPCのお店sey選択時。OCvalueは商人OC後の値段
+S 00c8 <len>.w {<amount>.w <item ID>.w}.4B*
+	NPCのお店から買う
+S 00c9 <>.w {<index>.w <amount>.w}.4B*
+	NPCのお店に売る
+R 00ca <type>.B
+	NPCから購入終了。type=00成功
+R 00cb <type>.B
+	NPCへ売却終了。type=00成功
+S 00cf <nick>.24B <type>.B
+	type=00 nickからの発言受け付け拒否 (/ex nick)
+	type=01 nickからの発言受け付け許可 (/in nick)
+S 00d0 <type>len.B
+	type=00 全ての発言受け付け拒否 (/exall)
+	type=01 全ての発言受け付け許可 (/inall)
+R 00d1 <type>.B <fail>.B
+	fail=00 発言受け付け拒否成功
+	fail=01 発言受け付け拒否失敗
+R 00d2 <type>.B <fail>.B
+	fail=00 全発言受け付け拒否成功
+	fail=01 全発言受け付け拒否失敗
+S 00d5 <len>.w <limit>.w <pub>.B <passwd>.8B <title>.?B
+	チャット立て。ここからチャット関係が続くけど調べが甘いので補完よろ
+R 00d6 <fail>.B
+	チャット立て応答
+R 00d7 <len>.w <owner ID>.l <chat ID>.l <limit>.w <users>.w <pub>.B <title>.?B
+	画面内チャット情報
+R 00d8 <chat ID>.l
+	チャット消去
+S 00d9 <chat ID>.l <passwd>.8B
+	チャット参加要請
+R 00da <fail>.B
+	チャット参加失敗
+R 00db <len>.w <chat ID>.l {<index>.l <nick>.24B}.28B*
+	チャット参加者リスト
+R 00dc <users>.w <nick>.24B
+	チャットへの参加者追加(?)
+R 00dd <index>.w <nick>.24B <fail>.B
+	チャットから参加者抜け
+S 00de <len>.w <limit>.w <pub>.B <passwd>.8B <title>.?B
+	チャットステータス変更
+R 00df <len>.w <owner ID>.l <chat ID>.l <limit>.w <users>.w <pub>.B <title>.?B
+	チャットステータス変更成功
+S 00e0 ?.l <nick>.24B
+	チャットルーム所有者変更要求?
+R 00e1 <index>.l <nick>.24B
+	チャット参加者番号付け直し?
+S 00e2 <nick>.24B
+	チャットkick
+S 00e3
+	チャット抜け
+S 00e4 <ID>.l
+	取り引き要求
+R 00e5 <nick>.24B
+	取り引き要請受け
+S 00e6 <type>.B
+	type=03 取り引き要請ok
+	type=04 取り引き要請キャンセル
+R 00e7 <fail>.B
+	取り引き要求応答
+	fail=00 距離が遠過ぎ
+	fail=03 要請受けてくれた
+	fail=04 キャンセルされた?
+S 00e8 <index>.w <amount>.l
+	アイテム追加。index=0でzeny追加。正規クライアントではzenyは00ebの直前のみ
+R 00e9 <amount>.l <type ID>.w <identify flag>.B <attribute?>.B <refine>.B <card>.4w
+	相手方からのアイテム追加
+R 00ea <index>.w <fail>.B
+	fail=00 アイテム追加成功
+	fail=01 追加失敗。相手側重量オーバ
+S 00eb
+	アイテム追加完了(ok押し)
+R 00ec <fail>.B
+	fail=00 自分からのok受領
+	fail=01 相手からのok受領
+S 00ed
+	取り引きキャンセル
+R 00ee
+	取り引きがキャンセルされました
+S 00ef
+	取り引き許諾(trade押し)
+R 00f0
+	取り引き完了
+R 00f2 <num>.w <limit>.w
+	カプラさん許容アイテム個数&現状
+S 00f3 <index>.w <amount>.l
+	カプラさん倉庫にアイテム放り込み
+R 00f4 <index>.w <amount>.l <type ID>.w <identify flag>.B <attribute?>.B <refine>.B <card>.4w
+	カプラさん倉庫のアイテム追加
+S 00f5 <index>.w <amount>.l
+	カプラさん倉庫からアイテム取り出し
+R 00f6 <index>.w <amount>.l
+	カプラさん倉庫のアイテム削除
+S 00f7
+	カプラさん倉庫閉じ
+R 00f8
+	カプラさん倉庫閉じ応答
+S 00f9 <party name>.24B
+	パーティ作成
+R 00fa <fail>.B
+	fail=00 作成成功
+R 00fb <len>.w <party name>.24B {<ID>.l <nick>.24B <map name>.16B <leader>.B <offline>.B}.46B*
+	パーティ情報まとめて送り
+S 00fc <ID>.l
+	パーティ勧誘する
+R 00fd <nick>.24B <fail>.B
+	fail=00 相手は既にパーティに入っていた
+	fail=01 相手に拒否された
+	fail=02 勧誘成功
+R 00fe <ID>.l <party name>.24B
+	パーティに誘われた
+S 00ff <ID>.l <fail>.l
+	パーティに誘われた時の返答。fail=1 ok返答?
+R 0100
+	? パーティ関連?
+S 0101 <exp>.w <item?>.w
+	パーティ設定変更
+R 0102 <exp>.w <item?>.w
+	パーティ設定現状? exp=2の場合は公平配分設定失敗?
+R 0104 <ID>.l ?.l <X>.w <Y>.w <offline>.B <party name>.24B <nick>.24B <map name>.16B
+	パーティ1人分情報更新
+R 0105 <ID>.l <nick>.24B <fail>.B
+	nickさんがパーティから離脱
+R 0106 <ID>,l <HP>.w <MaxHP>.w
+	パーティメンバHP更新
+R 0107 <ID>.l <X>.w <Y>.w
+	パーティメンバ位置更新
+S 0108 <len>.w <message>.?B
+	パーティ内発言
+R 0109 <len>.w <ID>.l <message>.?B
+	パーティ内発言受信
+R 010a <type ID>.w
+	MVPアイテム取得
+R 010b <exp>.l
+	MVP経験値取得
+R 010c <ID>.l
+	MVPキャラ表示
+R 010e <skill ID>.w <lv>.w <sp>.w <range>.w <up>.B
+	スキル情報更新。spは未使用?
+R 010f <len>.w {<skill ID>.w <target type>.w ?.w <lv>.w <sp>.w <range>.w <skill name>.24B <up>.B}.37B*
+	スキル情報の塊。skill nameは一部流れて来ない物がある＞AL_PNEUMA,PR_SLOWPOISON等
+	target typeは0-パッシブ、1-敵、2-場所、4-即時発動、16-味方
+	lv=0 up=0の場合はリストに出してない?
+R 0110 <skill ID>.w <basic type>.w ?.w <fail>.B <type>.B
+	fail=00の時にスキル利用失敗?
+	type 00:basic typeの方 01:SP不足 02:HP不足 03:memo無し 04:delay中
+	05:お金無し(めまー) 06:武器がよろしくない 07:赤ジェム無し 08:青ジェム無し 09:謎
+	basic type 00:取り引き 01:emotion 02:座り 03:チャット 04:パーティ
+	05:shout? 06:PK 07:マナーポイント
+R 0111 <skill ID>.w <target type>.w ?.w <lv>.w <sp>.w <range>.w <skill name>.24B <up>.B
+	010fの1つ分。β2だと未使用?
+S 0112 <skill ID>.w
+	スキルlvup要求
+S 0113 <level>.w <skill ID>.w <ID>.l
+	IDをターゲットにskillを使う
+R 0114 <skill ID>.w <src ID>.l <dst ID>.l <server tick>.l <src speed>.l <dst speed>.l <param1>.w <param2>.w <param3>.w <type>.B
+	攻撃系スキルエフェクト@
+	type=04 火壁で観測 type=06とほぼ同じ?
+	type=06 単発もの? param1はダメージ合計、param2はlevel、param3は1固定と予想
+	type=08 連打もの? param1はダメージ合計、param2はlevel、param3は分割数と予想
+R 0115 <skill ID>.w <src ID>.l <dst ID>.l <server tick>.l <src speed>.l <dst speed>.l <X>.w <Y>.w <param1>.w <param2>.w <param3>.w <type>.B
+	弾き飛ばし有り攻撃系スキルエフェクト
+	type=05 ダメージ&弾き飛ばし。param1はダメージ合計、param2はlevel、param3は分割数と予想
+	type=06 爆心地? 少なくともparam1はゴミの模様
+S 0116 <level>.w <skill ID>.w <X>.w <Y>.w
+	(X,Y)をターゲットにskillを使う
+R 0117 <skill ID>.w <src ID>.l <val>.w <X>.w <Y>.w <server tick>.l
+	場所相手のスキルエフェクト表示。valはレベルか、一部固さ?(氷壁)
+S 0118
+	攻撃キャンセル
+R 0119 <ID>.l <param1>.w <param2>.w <param3>.w ?.B
+	見た目変更
+	param1=02 フロストダイバで凍り漬け?
+	param2=01 毒?
+	param2=20 ANGELUS状態?
+	param3=01 サイトかルワッチ?
+	param3=0b ハイディング状態?
+	param3=0b クローキング状態?
+	param3=0d カート付き
+	param3=0e 鷹付き
+	param3=0f ペコペコ乗り
+
+R 011a <skill ID>.w <val>.w <dst ID>.l <src ID>.l <fail>.B
+	非ダメージ系スキル表示。ヒールの場合valは回復量
+	fail=00の場合失敗ぽいが、スチール以外では見た事無し
+S 011b <skill ID>.w <map name>.16B
+	011cへの応答。使わない場合"cancel"を送る
+R 011c <skill ID>.w <map1>.16B <map2>.16B <map3>.16B <map4>.16B
+	テレポ/ポタの場所選択。
+	テレポの場合、Random/セーブ場所、ポタの場合、セーブ場所/memo1/memo2/memo3となる
+	マップ名のみ送られる
+S 011d
+	現在居る所をメモ要求
+R 011e <fail>.B
+	fail=00 メモ成功
+	fail=01 メモ失敗
+R 011f <dst ID>.l <src ID>.l <X>.w <Y>.w <type>.B <fail>.B
+	スキル効能地作成
+	type 7e:SW 7f:火壁 80:ポタ発動中 81:ポタ発動前 83:サンク 85:フニューマ
+	86:バーミリオン 8c:トーキーボックス発動時 8d:氷壁 8e:くあぐまいやー 91:あんくるすねあ
+	93:らんどまいん 97:?? 99:トーキーボックス発動前
+	他情報求む
+R 0120 <ID>.l
+	スキル効能地消去
+R 0121 <num>.w <num limit>.w <weight>.l <weight limit>l
+	カートの種類&重さの現在値&上限
+R 0122 <len>.w {<index>.w <item ID>.w <type>.B <identify flag>.B <equip type>.w <equip point>.w <attribute?>.B <refine>.B <card>.4w}.20B*
+	カート内アイテム。装備品
+R 0123 <len>.w {<index>.w <item ID>.w <type>.B <identify flag>.B <amount>.w ?.2B}.10B*
+	カート内アイテム。消耗品/収集品
+R 0124 <index>.w <amount>.l <item ID>.w <identify flag>.B <attribute?>.B <refine>.B <card>.4w
+	カートにアイテム追加
+R 0125 <index>.w <amount>.l
+	カートからアイテム削除
+S 0126 <index>.w <amount>.l
+	カートにアイテムを入れる
+S 0127 <index>.w <amount>.l
+	カートからアイテムを取り出す
+S 0128 <index>.w <amount>.l
+	カプラさんからカートへアイテムを移す
+S 0129 <index>.w <amount>.l
+	カートからカプラさんへアイテムを移す
+R 012c <fail>.B
+	fail=00 重量制限を越えてカートにアイテムを入れられませんでした?
+R 012d <num>.w
+	露店開設。アイテムリスト要求。numは置ける最大数
+S 012e
+	露店閉鎖
+S 012f <len>.w <message>.80B {<index>.w <amount>.w <value>.l}.8B*
+	露店開設、露店名&アイテム,値段リスト
+S 0130 <ID>.l
+	露店アイテムリスト要求
+R 0131 <ID>.l <message>.80B
+	露店看板表示
+R 0132 <ID>.l
+	露店看板消去
+R 0133 <len>.w <ID>.l {<value>.l <amount>.w <index>.w <type>.B <item ID>.w <identify flag>.B <attribute?>.B <refine>.B <card>.4w}.22B
+	露店アイテムリスト
+S 0134 <len>.w <ID>.l {<amount>.w <index>.w}.4B*
+	露店アイテム購入
+R 0135 <index>.w <amount>.w <fail>.B
+	露店アイテム購入失敗。failは原因
+R 0136 <len>.w <ID>.l {<value>.l <index>.w <amount>.w <type>.B <item ID>.w <identify flag>.B <attribute?>.B <refine>.B <card>.4w}.22B*
+	露店開設成功
+R 0137 <index>.w <amount>.w
+	露店アイテム販売報告
+R 0139 <ID>.l <X>.w <Y>.w <X2>.w <Y2>.w <range>.w
+	IDの敵は(X,Y)に居て自分は(X2,Y2)に居るので攻撃が届きませんでした
+	攻撃可能距離はrangeなので、近寄って下さい?
+R 013a <val>.w
+	攻撃射程
+R 013b <type>.w
+	各種メッセージ表示。3=矢が装備できました
+R 013c <ID>.w
+	装備された矢のItemID。0で、未装備状態。
+R 013d <type>.w <val>.w
+	HP回復スキル/SP回復スキルによる回復
+	type=5ならHP type=7ならSP
+R 013c <index>.w
+　　	装備している矢
+
+R 013e <src ID>.l <dst ID>.l <X>.w <Y>.w <lv?>.w ?.w <wait>.l
+	スキル詠唱中。PC/NPCが相手の場合は(X,Y)は0。場所がターゲットの場合はdst IDは0になる
+
+	0x013e の offset+16(dword) はスキル属性です(調査済)。
+	00:無 01:水 02:地 03:火 04:風 05:毒 06:聖 07:暗 08:念 09:死
+	将来的に、詠唱中のエフェクトが属性で変わるのかと。
+
+	waitはms単位かな?
+R 0141 <type>.l <base>.l <bonus>.l
+	ステータス情報。typeは0dから12が順にSTR,AGI,VIT,INT,DEX,LUKに対応
+	base+bonusと表示される
+R 0144 <ID>.l <type>.l <X>.l <Y>.l <point ID>.B <color>.3B ?.B
+	案内員用、マップ上アイコン表示パケット
+	type=1 アイコンを表示
+	type=2 アイコンを消去
+R 0145 <file name>.16B <type>.B
+	(今の所)カプラさんcutin表示
+	type=02 表示
+	type=ff 消去
+S 0146 <ID>.l
+	IDのNPCとの会話。CLOSEボタンを押した。ack無しにNPCメッセージウィンドを同時に閉じる
+R 0147 <skill ID>.w <target type>.w ?.w <lv>.w <sp>.w <range>.w <skill name>.24B <up>.B
+	アイテム利用の結果一時的に得られたスキル情報
+S 0148 <ID>.l
+	リザレクションの相手決め? @ β1
+S 0149 <ID>.l <type>.B
+	IDにマナーポイントを与える。type=00 プラス type=01 マイナス
+R 014a <fail>.l
+	マナーポイントを与えた結果。fail=0 成功 fail=1 失敗
+R 014b <type>.B <nick>.24B
+	マナーポイントを貰った。type=00 プラス type=01 マイナス
+R 014C <len>.w (<type>.l <guildID>.l <guild name>.24B).*
+	同盟･敵対ギルド表示
+	type=0 同盟
+	type=1 敵対
+S 014D
+　　	ギルド情報表示開始？
+R 014E <type?>.l
+　　	type=0x57 一般ギルド団員
+　　	type=0xD7 ギルドマスター
+S 014F <page>.l
+　　	ギルド表示タブ送信
+R 0150 <guildID>.l <guildLv>.l <connum>.l <定員>.l <Avl.lvl>.l ?.l <next_exp>.l ?.16B <guild name>.24B <guild master>.24B ?.16B
+　　	ギルド情報
+S 0151 <guild ID>.l
+	エンブレム要求
+R 0152 <len>.w <guild ID>.l <emblem ID?>.l <emblem data>.?B
+	エンブレムイメージ送付
+R 0154 <len>.w {<accID>.l <charactorID>.l <髪型>.w <髪の色>.w <性別？>.w <job>.w <lvl?>.w <上納経験値>.l <online>.l <Position>.l ?.50B <nick>.24B}*
+	ギルドメンバリスト?
+S 0159 <guildID>.l <accID>.l <charID>.l <mess>.40B
+　　	ギルド脱退送信
+R 015A <nic>.24B <mess>.40B
+　　	ギルド脱退(全員)受信
+S 015B <guildID>.l <accID>.l <charID>.l <mess>.40B
+　　	ギルド追放送信
+R 015C <nick>.24B <mess>.40B <アカウントＩＤ>.24B
+　　	ギルド追放（全員）受信
+R 0163 <len>.w <nick>.24B <アカウントＩＤ>.24B <追放理由>.40B
+
+S 0165 <myaccID>.l <guild name>.24B
+　　	ギルド作成
+R 0166 <len>.w ?.28B*
+	役職名リスト?
+R 0167 <type>.b
+	ギルド作成合否
+	type = 0 ギルド作成成功
+	type = 2 同名のギルドがある
+S 0168 <TargetAccID>.l <sourceAccID>.l <myCharactorID>.l
+　　	ギルド勧誘
+R 0169 <type>.B
+　　	ギルド勧誘拒否された
+R 016A <guild ID>.l <guild name>.24B
+　　	ギルド勧誘された
+S 016B <guild ID>.l <type>.l
+　　	ギルド勧誘返信
+　　	type=0 拒否する
+　　	type=1 許諾する
+R 016c <guild ID>.l ?.13B <guild name>.24B
+	login時ギルド情報
+R 016d <ID>.l <charactor ID>.l <online>.l
+	ギルドメンバがloginした抜けた等
+R 016f <message>.180B
+	ギルドお題目?
+S 016E <guildID>.l <mess1>.60B <mess2>.120B
+　　	ギルド告知設定
+R 016F <mess1>.60B <mess2>.120B
+　　	ギルド告知
+S 0170 <TargetAccID>.l <sourceAccID>.l <myCharactorID>.l
+　　	同盟要請勧誘
+R 0171 <SorceAccID>.l <guild name>.24B
+　　	同盟要請勧誘された
+S 0172 <SorceAccID>.l <type>.l
+　　	同盟要請返信
+　　	type=0 拒否する
+　　	type=1 許諾する
+R 0173 <type>.B
+	type = 0 すでに同盟関係
+　　	type = 1 同盟拒否された
+　　	type = 2 同盟成功
+R 0177 <len>.w <index>.w*
+	鑑定可能アイテムリスト
+S 0178 <index>.w
+	アイテム鑑定
+R 0179 <index>.w <fail>.B
+	アイテム鑑定結果。fail=00で成功。fail=01ってあるのか?
+S 017A <index>.w
+　　	カードＷクリック
+R 017B <len>.w {<index>.w}*
+　　	カード挿入できるアイテムIndex番号
+S 017C <SrcIndex>.w <DescIndex>.w
+　　	Src をDescに突っ込む
+R 017D <DescIndex>.w <SrcIndex>.w <fail>.b
+　　	Src をDescに突っ込み<fail> 0=成功 1=失敗？
+S 017e <len>.w <message>.?B
+	ギルド内メッセージ発言
+R 017f <len>.w <message>.?B
+	ギルド内メッセージ受信
+R 0182 <accID>.l <charactorID>.l <髪型>.w <髪の色>.w <性別？>.w <job>.w <lvl?>.w <上納経験値>.l <online>.l <Position>.l ?.50B <nick>.24B
+	
+R 0187 <account ID>.l
+	alive信号?
+R 0188 <fail?>.w <index>.w <val>.w
+	武器精錬。結果+val武器に
+R 0189 ?.w
+	謎。テレポ失敗?
+S 018a ?.w
+	ゲーム終了
+R 018b <fail>.w
+	ゲーム終了/キャラセレ応答。fail=0成功。fail=1失敗?
+R 018C <MonsID>.w <等級>.w <大小>.w <生命値>.w <?>.w <防御力>.w <種族>.w <魔法防御力>.w <属性>.w <魔法相性属性>.9b
+	wizの敵のセンス結果
+	0 小型
+	1 中型
+	2 大型
+R 0191 <ID>.l <message>.80B
+	トーキーボックスのメッセージ
+S 0193 <ID>.l
+	ギルドメンバ名前引き?
+R 0194 <ID>.l <nick>.24B
+	ギルドメンバ名前引き応答?
+R 0195 <ID>.l <nick>.24B <party name>.24B <guild name>.24B <class name>.24B
+	ギルド所属PCの場合の0094返答
+R 0196 <type>.w <ID>.l
+	増強系スキル使用時のメッセージ色々。IDはtargetと思われるが自分相手のみしか来ない?
+	type=00	2HQ付与「攻撃速度が増加しました。」
+	type=01	2HQ解除「攻撃速度が減少しました。」
+	type=02 IMPOSITIO付与「武器の攻撃力が増加しました。」
+	type=03 IMPOSITIO解除「武器の攻撃力が減少しました。」
+	type=04	「スキル使用ディレイが減少しました。」
+	type=05	「スキル使用ディレイが元に戻りました。」
+	type=06	「武器に毒属性が付与されました。」
+	type=07 ASPERSIO付与「武器に聖属性が付与されました。」
+	type=08 ASPERSIO解除「武器の属性が元に戻りました。」
+	type=09	「防具に聖属性が付与されました。」
+	type=0a	「防具の属性が元に戻りました。」
+	type=0b KYRIE付与「バリア状態になりました。」
+	type=0c KYRIE解除「バリア状態が解除されました。」
+	type=0d	「ウェポンパーフェクションモードになりました。」
+	type=0e	「ウェポンパーフェクションモードが解除されました。」
+	type=0f	「オーバートラストモードになりました。」
+	type=10	「オーバートラストモードが解除されました。」
+	type=11	「マキシマイズパワーモードになりました。」
+	type=12	「マキシマイズパワーモードが解除されました。」
+S 0197 <type>.w
+	type=0 /resetstate
+	type=1 /resetskill
+	効能は無し?
+R 019b <ID>.l <type>.l
+	他人のlvupや武器精錬等の表示?
+	type=0 base lvup?
+	type=1 job lvup?
+	type=3 武器精錬
+R 0199 <type>.w
+　　	type=1 pvpモード開始?
+R 019a <ID>.l <rank>.l <num>.l
+　　	pvp順位 rank/num
+S 00CC <ID>.l
+　	GM用右クリックメニュー「（name）使用者強制終了」使用
+S 0149 <ID>.l <type>.B <time>.w
+　	GM用右クリックメニュー「チャット禁止時間を下げる（解ける）」使用 → type=00
+　	GM用右クリックメニュー「チャット禁止時間を上げる（掛ける）」使用 → type=01
+	　timeは分単位です（確か
+
+パケット長の追加。019e～01aaが増えてるので、0190～を切り抜き
+　 90, 86, 24,　6, 30,102,　8,　4,　 8,　4, 14, 10, -1,　6,　2,　6,
+　　3,　3, 35,　5, 11, 26, -1,　4,　 4,　6, 10

@@ -1,0 +1,8 @@
+1	admin	admin	2003-05-26 22:13:26.962	S	431
+100002	Lemming	bastard	2003-05-26 22:19:06.291	M	75
+100003	Lem3	Lem	-	F	1
+4	s4	p4	-	S	1
+5	s5	p5	-	S	1
+8	test	test	2003-05-18 15:44:07.466	F	1559
+6	tesko	tesko	2003-03-27 01:56:05.348	M	16
+7	ID	pass	-	M	1

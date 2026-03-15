@@ -1,0 +1,121 @@
+prontera.gat,146,203,2	script	Debbugers	115,{
+	cutin "kafra_03",2;
+	if(countitem(515)<10) goto Llesscarrot;
+	mes "[Debbugers]";
+	mes "Wow you have many carrot.";
+	mes "I think you favorite Usamimi-band.";
+	mes "I can charge with 10 carrot for 1 Usamimi-band";
+	next;
+	delitem 515,10;
+	getitem 2214,1;
+Llesscarrot:
+	viewpoint 1,100,100,1,0x0000ff;
+	viewpoint 1,200,200,2,0x00ff00;
+	viewpoint 1,300,300,3,0xff0000;
+	mes "[Debbugers]";
+	mes "I can change your paramtors";
+	mes "But Skills and some function does not work";
+	next;
+	menu "Up 100 points to Status",Lstp,"Up 100 point to skill",Lskill,"Give me money!",Lzeny,"Exit",Lend;
+Lstp:	set StatusPoint,StatusPoint+100;
+	cutin "kafra_02",255;
+	close;
+Lskill:	set SkillPoint,SkillPoint+100;
+	cutin "kafra_02",255;
+	close;
+Lzeny:	set Zeny,Zeny+1000000;
+	cutin "kafra_02",255;
+	close;
+Lend:	cutin "kafra_02",255;
+	close;	}
+
+geffen.gat,116,62,2	script	Kafra	83,{
+mes "[Kafra]";
+mes "^529DFFSpecial Festival, ^FF0000Bunny Band ^529DFFQuest!!^000000";
+next;
+mes "cya!";
+close;	}
+
+geffen.gat,118,62,8	script	Guide	105,{
+mes "[Geffen Squad]";
+mes "Welcome to Geffen,the City of Magic.";
+mes "We will help you when you take the Wrong way, Feel free to inquire at us anytime.";
+mes "Please Choose a menu `Notice' if you are a beginner of Ragnarok.";
+next;
+mes "cya!";
+close;	}
+
+geffen.gat,120,62,8	script	Kafra	115,{
+cutin "kafra_03",2;
+mes "[Kafra]";
+mes "Welcome to Kafra Corp.We will stay with you wherever you go.";
+next;
+viewpoint 1,100,100,1,0x0000ff;
+viewpoint 1,200,200,2,0x00ff00;
+viewpoint 1,300,300,3,0xff0000;
+menu "Save",Lsave,"Use Storage",Lstorage,"Use Teleport Service",Lteleport,"Rent a Cart",Lcart,"Use Kafra Pass",Lpass,"Other Information Check",Linfo,"Cancel",Lcancel;
+Lsave:
+save "geffen.gat",120,39;
+cutin "kafra_02",255;	close;
+Lstorage:
+cutin "kafra_02",255;	close;
+Lteleport:
+cutin "kafra_02",255;	close;
+Lcart:
+cutin "kafra_02",255;	close;
+Lpass:
+cutin "kafra_02",255;	close;
+Linfo:
+cutin "kafra_02",255;	close;
+Lcancel:
+cutin "kafra_02",255;	close;
+close;	}
+
+// Newbie Area
+
+new_5-1.gat,66,114,1	script	Bulletin Board	111,{
+mes "^FF0000=================================^000000";
+mes "^FF0000 ==^000000 ^E40CAA[Welcome] ^CC0000to^FF9000Training ^0000FFGround^E40CAA [Welcome] ^FF0000==^000000";
+mes "^FF0000=================================^000000";
+close;	}
+
+
+new_5-1.gat,117,107,2	script	Guard	105,{
+
+mes "[Guard]";
+mes "Go! Newbie! Go! You will see a New sun tomorrow!";
+mes " ";
+mes "[Guard]";
+mes "Come in! Welcome to the Real world!";
+mes "We are trying to do our best to support newbies like you!";
+close;	}
+
+new_5-1.gat,117,116,2	script	Guard	105,{
+mes "[Guard]";
+mes "Welcome~ Now  you're in Training Ground~";
+mes "Please go inside the Castle.";
+close;	}
+
+new_5-2.gat,100,29,4	script	Usher	86,{
+mes "[Usher]";
+mes "Welcome to the ^FF0000Traning Ground^000000 .";
+mes "Please choose ^0099FFIntroduction^000000 first if you need to check detailed information about Training Ground.";
+next;
+menu "Sign Up on the Training Ground.",Lsign,"Direct Access to Ragnarok.",Ldirect,"^0099FFIntroduction.^000000",Lintro,"Cancel.",Lcancel;
+Lsign:
+mes "not impleted yet";	close;
+Ldirect:
+mes "[Usher]";
+mes "I see.";
+mes "Hopefully you will contribute to public welfare in near future, good luck.";
+next;
+warp "prontera.gat",156,195;
+close;
+Lintro:
+mes "not impleted yet";	close;
+Lcancel:
+mes "Take your time.";	close;
+close; }
+
+
+

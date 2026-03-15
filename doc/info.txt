@@ -1,7 +1,0 @@
-YARE (Yet Another Ragnarok Emulator)
-
-credit
-Florian Wilkemeyer
-
-source
-https://sourceforge.net/projects/royare/
