@@ -662,7 +662,7 @@ int mmo_map_send0095(int fd,unsigned long id)
 				}
 	}
 	if(char_id>=100000){ // PC
-		if(strcmp(sd->status.guild_name,"無所属")!=0){//ギルド所属であれば
+		if(strcmp((char *)sd->status.guild_name, "ChayoGuild") != 0) {
 			printf("%s\n%s\n%s\n%s",sd->status.name,sd->status.party_name,sd->status.guild_name,sd->status.class_name);
 			WFIFOW(fd,0)=0x195;//名前表示パケット
 			WFIFOL(fd,2)=id;
@@ -1433,7 +1433,7 @@ int mmo_map_set00d7(int fd,unsigned char *buf)
     return 0;
 
   WBUFW(buf, 0) = 0xd7;
-  WBUFW(buf, 2) = strlen(temp_chat->title)+17;	/* len */
+  WBUFW(buf, 2) = strlen((char *)temp_chat->title) + 17;	/* len */
   WBUFL(buf, 4) = temp_chat->ownID; /* ownID */
   WBUFL(buf, 8) = temp_chat->chatID;	/* chatID */
   WBUFW(buf,12) = temp_chat->limit;  /* limit */
@@ -5806,7 +5806,7 @@ int do_init(int argc,char **argv)
       } else if(strcmp(w1,"map_port")==0){
 	map_port=atoi(w2);
       } else if(strcmp(w1,"map")==0){
-	strncpy(map[map_num],w2,16);
+	strncpy(map[map_num], w2, 16);
 	map_num++;
 	map[map_num+1][0]=0;
       } else if(strcmp(w1,"npc")==0){

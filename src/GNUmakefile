@@ -1,6 +1,8 @@
 CFLAGS = -O9 -Wall -g -fcommon
 LDFLAGS = -Wl,--allow-multiple-definition
 
+.PHONY: all clean login-server char-server map-server
+
 all: login-server char-server map-server
 
 login-server: login2.o core.o

@@ -1,23 +1,55 @@
-map2.c: In function ‘mmo_map_send0095’:
-map2.c:665:37: warning: pointer targets in passing argument 1 of ‘strcmp’ differ in signedness [-Wpointer-sign]
-  665 |                 if(strcmp(sd->status.guild_name,"������")!=0){//�M���h�����ł����
-      |                           ~~~~~~~~~~^~~~~~~~~~~
-      |                                     |
-      |                                     unsigned char *
-In file included from map2.c:11:
+core.c: In function ‘connect_client’:
+core.c:107:7: warning: variable ‘result’ set but not used [-Wunused-but-set-variable]
+  107 |   int result;
+      |       ^~~~~~
+core.c: In function ‘make_connection’:
+core.c:185:7: warning: variable ‘result’ set but not used [-Wunused-but-set-variable]
+  185 |   int result;
+      |       ^~~~~~
+char2.c: In function ‘make_new_char’:
+char2.c:303:32: warning: pointer targets in passing argument 2 of ‘strcmp’ differ in signedness [-Wpointer-sign]
+  303 |     if(strcmp(char_dat[i].name,dat)==0 || (char_dat[i].account_id==sd->account_id && char_dat[i].char_num==dat[30]))
+      |                                ^~~
+      |                                |
+      |                                unsigned char *
+In file included from char2.c:11:
+/usr/include/string.h:36:32: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   36 | int      strcmp (const char *, const char *);
+      |                                ^~~~~~~~~~~~
+char2.c:315:27: warning: pointer targets in passing argument 2 of ‘strcpy’ differ in signedness [-Wpointer-sign]
+  315 |   strcpy(char_dat[i].name,dat);
+      |                           ^~~
+      |                           |
+      |                           unsigned char *
+/usr/include/string.h:38:36: note: expected ‘const char * restrict’ but argument is of type ‘unsigned char *’
+   38 | char    *strcpy (char *__restrict, const char *__restrict);
+      |                                    ^
+In file included from char2.c:14:
+char2.c: In function ‘parse_char’:
+core.h:14:66: warning: pointer targets in passing argument 1 of ‘strcmp’ differ in signedness [-Wpointer-sign]
+   14 | #define RFIFOP(fd,pos) (session[fd]->rdata+session[fd]->rdata_pos+pos)
+      |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+      |                                                                  |
+      |                                                                  unsigned char *
+char2.c:940:35: note: in expansion of macro ‘RFIFOP’
+  940 |       if(i==MAX_SERVERS || strcmp(RFIFOP(fd,2),userid) || strcmp(RFIFOP(fd,26),passwd)){
+      |                                   ^~~~~~
 /usr/include/string.h:36:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
    36 | int      strcmp (const char *, const char *);
       |                  ^~~~~~~~~~~~
-map2.c: In function ‘mmo_map_set00d7’:
-map2.c:1436:35: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
- 1436 |   WBUFW(buf, 2) = strlen(temp_chat->title)+17;  /* len */
-      |                          ~~~~~~~~~^~~~~~~
-      |                                   |
-      |                                   unsigned char *
-/usr/include/string.h:41:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
-   41 | size_t   strlen (const char *);
+core.h:14:66: warning: pointer targets in passing argument 1 of ‘strcmp’ differ in signedness [-Wpointer-sign]
+   14 | #define RFIFOP(fd,pos) (session[fd]->rdata+session[fd]->rdata_pos+pos)
+      |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+      |                                                                  |
+      |                                                                  unsigned char *
+char2.c:940:66: note: in expansion of macro ‘RFIFOP’
+  940 |       if(i==MAX_SERVERS || strcmp(RFIFOP(fd,2),userid) || strcmp(RFIFOP(fd,26),passwd)){
+      |                                                                  ^~~~~~
+/usr/include/string.h:36:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   36 | int      strcmp (const char *, const char *);
       |                  ^~~~~~~~~~~~
 In file included from map2.c:14:
+map2.c: In function ‘mmo_map_set00d7’:
 core.h:33:44: warning: pointer targets in passing argument 1 of ‘strcpy’ differ in signedness [-Wpointer-sign]
    33 | #define WBUFP(p,pos) (((unsigned char*)(p))+pos)
       |                      ~~~~~~~~~~~~~~~~~~~~~~^~~~~
@@ -26,6 +58,7 @@ core.h:33:44: warning: pointer targets in passing argument 1 of ‘strcpy’ dif
 map2.c:1442:10: note: in expansion of macro ‘WBUFP’
  1442 |   strcpy(WBUFP(buf,17),temp_chat->title);  /* title */
       |          ^~~~~
+In file included from map2.c:11:
 /usr/include/string.h:38:18: note: expected ‘char * restrict’ but argument is of type ‘unsigned char *’
    38 | char    *strcpy (char *__restrict, const char *__restrict);
       |                  ^
@@ -1225,8 +1258,8 @@ map2.c:5735:5: note: ‘sprintf’ output between 6 and 12293 bytes into a desti
       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 map2.c: In function ‘do_init’:
 map2.c:5809:9: warning: ‘strncpy’ output may be truncated copying 16 bytes from a string of length 1023 [-Wstringop-truncation]
- 5809 |         strncpy(map[map_num],w2,16);
-      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 5809 |         strncpy(map[map_num], w2, 16);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 map2.c: In function ‘mmo_map_all_skill’:
 map2.c:2727:5: warning: ‘memcpy’ forming offset [1, 23] is out of the bounds [0, 1] [-Warray-bounds=]
  2727 |     memcpy(WBUFP(buf,4+c*37+12),"",24); //name
@@ -1245,3 +1278,772 @@ map2.c:6128:17: warning: ‘memcpy’ forming offset [1, 23] is out of the bound
 map2.c:6142:17: warning: ‘memcpy’ forming offset [1, 23] is out of the bounds [0, 1] [-Warray-bounds=]
  6142 |                 memcpy(WFIFOP(fd,14),"",24);
       |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+grfio.c: In function ‘filelist_find’:
+grfio.c:281:41: warning: pointer targets in passing argument 1 of ‘filehash’ differ in signedness [-Wpointer-sign]
+  281 |         for(hash=filelist_hash[filehash(fname)];hash>=0;hash=filelist[hash].next) {
+      |                                         ^~~~~
+      |                                         |
+      |                                         char *
+grfio.c:252:36: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+  252 | static int filehash(unsigned char *fname)
+      |                     ~~~~~~~~~~~~~~~^~~~~
+grfio.c: In function ‘filelist_add’:
+grfio.c:310:30: warning: pointer targets in passing argument 1 of ‘filehash’ differ in signedness [-Wpointer-sign]
+  310 |         hash = filehash(entry->fn);
+      |                         ~~~~~^~~~
+      |                              |
+      |                              char *
+grfio.c:252:36: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+  252 | static int filehash(unsigned char *fname)
+      |                     ~~~~~~~~~~~~~~~^~~~~
+grfio.c: In function ‘grfio_entryread’:
+grfio.c:506:19: warning: pointer targets in passing argument 1 of ‘strcmp’ differ in signedness [-Wpointer-sign]
+  506 |         if(strcmp(grf_header,"Master of Magic") || fseek(fp,getlong(grf_header+0x1e),1)){       // SEEK_CUR
+      |                   ^~~~~~~~~~
+      |                   |
+      |                   unsigned char *
+In file included from grfio.c:16:
+/usr/include/string.h:36:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   36 | int      strcmp (const char *, const char *);
+      |                  ^~~~~~~~~~~~
+grfio.c:534:27: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
+  534 |                 if(strlen(fname)>=sizeof(filelist[entry].fn)-1){
+      |                           ^~~~~
+      |                           |
+      |                           unsigned char *
+/usr/include/string.h:41:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   41 | size_t   strlen (const char *);
+      |                  ^~~~~~~~~~~~
+grfio.c:539:39: warning: pointer targets in passing argument 1 of ‘rindex’ differ in signedness [-Wpointer-sign]
+  539 |                 if((period_ptr=rindex(fname,'.'))!=NULL){
+      |                                       ^~~~~
+      |                                       |
+      |                                       unsigned char *
+In file included from /usr/include/string.h:24:
+/usr/include/strings.h:65:17: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   65 | char    *rindex(const char *, int) __pure;                      /* LEGACY */
+      |                 ^~~~~~~~~~~~
+grfio.c:560:34: warning: pointer targets in passing argument 2 of ‘strcpy’ differ in signedness [-Wpointer-sign]
+  560 |                 strcpy(aentry.fn,fname);
+      |                                  ^~~~~
+      |                                  |
+      |                                  unsigned char *
+/usr/include/string.h:38:36: note: expected ‘const char * restrict’ but argument is of type ‘unsigned char *’
+   38 | char    *strcpy (char *__restrict, const char *__restrict);
+      |                                    ^
+grfio.c: In function ‘grfio_resourcecheck’:
+grfio.c:589:27: warning: pointer targets in passing argument 1 of ‘sscanf’ differ in signedness [-Wpointer-sign]
+  589 |                 if(sscanf(ptr,"%[^#]#%[^#]#",w1,w2)==2){
+      |                           ^~~
+      |                           |
+      |                           unsigned char *
+In file included from grfio.c:14:
+/usr/include/stdio.h:210:17: note: expected ‘const char * restrict’ but argument is of type ‘unsigned char *’
+  210 | int     sscanf (const char *__restrict, const char *__restrict, ...)
+      |                 ^
+grfio.c:609:30: warning: pointer targets in passing argument 1 of ‘strchr’ differ in signedness [-Wpointer-sign]
+  609 |                 ptr = strchr(ptr,'\n');
+      |                              ^~~
+      |                              |
+      |                              unsigned char *
+/usr/include/string.h:35:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   35 | char    *strchr (const char *, int);
+      |                  ^~~~~~~~~~~~
+grfio.c:609:21: warning: pointer targets in assignment from ‘char *’ to ‘unsigned char *’ differ in signedness [-Wpointer-sign]
+  609 |                 ptr = strchr(ptr,'\n');
+      |                     ^
+grfio.c: In function ‘BitConvert4’:
+grfio.c:155:9: warning: array subscript ‘DWORD {aka long unsigned int}[0]’ is partly outside array bounds of ‘BYTE[8]’ {aka ‘unsigned char[8]’} [-Warray-bounds=]
+  155 |         *(DWORD*)(tmp+4)=0;
+      |         ^~~~~~~~~~~~~~~~
+grfio.c:140:14: note: at offset 4 into object ‘tmp’ of size 8
+  140 |         BYTE tmp[8];
+      |              ^~~
+grfio.c:162:25: warning: array subscript ‘DWORD {aka long unsigned int}[0]’ is partly outside array bounds of ‘BYTE[8]’ {aka ‘unsigned char[8]’} [-Warray-bounds=]
+  162 |         *(DWORD*)Src ^= *(DWORD*)(tmp+4);
+      |                         ^~~~~~~~~~~~~~~~
+grfio.c:140:14: note: at offset 4 into object ‘tmp’ of size 8
+  140 |         BYTE tmp[8];
+      |              ^~~
+In function ‘BitConvert’,
+    inlined from ‘decode_des_etc’ at grfio.c:175:4,
+    inlined from ‘grfio_read’ at grfio.c:452:4:
+grfio.c:126:38: warning: array subscript ‘DWORD {aka long unsigned int}[0]’ is partly outside array bounds of ‘BYTE[8]’ {aka ‘unsigned char[8]’} [-Warray-bounds=]
+  126 |         *(DWORD*)tmp=*(DWORD*)(tmp+4)=0;
+      |                      ~~~~~~~~~~~~~~~~^~
+grfio.c: In function ‘grfio_read’:
+grfio.c:125:14: note: at offset 4 into object ‘tmp’ of size 8
+  125 |         BYTE tmp[8];
+      |              ^~~
+In function ‘BitConvert’,
+    inlined from ‘decode_des_etc’ at grfio.c:175:4,
+    inlined from ‘grfio_read’ at grfio.c:452:4:
+grfio.c:134:26: warning: array subscript ‘DWORD {aka long unsigned int}[0]’ is partly outside array bounds of ‘BYTE[8]’ {aka ‘unsigned char[8]’} [-Warray-bounds=]
+  134 |         *(DWORD*)(Src+4) = *(DWORD*)(tmp+4);
+      |         ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+grfio.c: In function ‘grfio_read’:
+grfio.c:125:14: note: at offset 4 into object ‘tmp’ of size 8
+  125 |         BYTE tmp[8];
+      |              ^~~
+In function ‘BitConvert’,
+    inlined from ‘decode_des_etc’ at grfio.c:177:4,
+    inlined from ‘grfio_read’ at grfio.c:452:4:
+grfio.c:126:38: warning: array subscript ‘DWORD {aka long unsigned int}[0]’ is partly outside array bounds of ‘BYTE[8]’ {aka ‘unsigned char[8]’} [-Warray-bounds=]
+  126 |         *(DWORD*)tmp=*(DWORD*)(tmp+4)=0;
+      |                      ~~~~~~~~~~~~~~~~^~
+grfio.c: In function ‘grfio_read’:
+grfio.c:125:14: note: at offset 4 into object ‘tmp’ of size 8
+  125 |         BYTE tmp[8];
+      |              ^~~
+In function ‘BitConvert’,
+    inlined from ‘decode_des_etc’ at grfio.c:177:4,
+    inlined from ‘grfio_read’ at grfio.c:452:4:
+grfio.c:134:26: warning: array subscript ‘DWORD {aka long unsigned int}[0]’ is partly outside array bounds of ‘BYTE[8]’ {aka ‘unsigned char[8]’} [-Warray-bounds=]
+  134 |         *(DWORD*)(Src+4) = *(DWORD*)(tmp+4);
+      |         ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+grfio.c: In function ‘grfio_read’:
+grfio.c:125:14: note: at offset 4 into object ‘tmp’ of size 8
+  125 |         BYTE tmp[8];
+      |              ^~~
+grfio.c: In function ‘grfio_resourcecheck’:
+grfio.c:594:52: warning: ‘%s’ directive writing up to 255 bytes into a region of size 251 [-Wformat-overflow=]
+  594 |                                 sprintf(src,"data\\%s",w1);
+      |                                                    ^~  ~~
+grfio.c:594:33: note: ‘sprintf’ output between 6 and 261 bytes into a destination of size 256
+  594 |                                 sprintf(src,"data\\%s",w1);
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+grfio.c:595:52: warning: ‘%s’ directive writing up to 255 bytes into a region of size 251 [-Wformat-overflow=]
+  595 |                                 sprintf(dst,"data\\%s",w2);
+      |                                                    ^~  ~~
+grfio.c:595:33: note: ‘sprintf’ output between 6 and 261 bytes into a destination of size 256
+  595 |                                 sprintf(dst,"data\\%s",w2);
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+grfio.c:591:61: warning: ‘%s’ directive writing up to 255 bytes into a region of size 243 [-Wformat-overflow=]
+  591 |                                 sprintf(src,"data\\texture\\%s",w1);
+      |                                                             ^~  ~~
+grfio.c:591:33: note: ‘sprintf’ output between 14 and 269 bytes into a destination of size 256
+  591 |                                 sprintf(src,"data\\texture\\%s",w1);
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+grfio.c:592:61: warning: ‘%s’ directive writing up to 255 bytes into a region of size 243 [-Wformat-overflow=]
+  592 |                                 sprintf(dst,"data\\texture\\%s",w2);
+      |                                                             ^~  ~~
+grfio.c:592:33: note: ‘sprintf’ output between 14 and 269 bytes into a destination of size 256
+  592 |                                 sprintf(dst,"data\\texture\\%s",w2);
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In function ‘BitConvert’,
+    inlined from ‘decode_filename’ at grfio.c:476:3,
+    inlined from ‘grfio_entryread’ at grfio.c:533:11,
+    inlined from ‘grfio_add’ at grfio.c:650:11:
+grfio.c:126:38: warning: array subscript ‘DWORD {aka long unsigned int}[0]’ is partly outside array bounds of ‘BYTE[8]’ {aka ‘unsigned char[8]’} [-Warray-bounds=]
+  126 |         *(DWORD*)tmp=*(DWORD*)(tmp+4)=0;
+      |                      ~~~~~~~~~~~~~~~~^~
+grfio.c: In function ‘grfio_add’:
+grfio.c:125:14: note: at offset 4 into object ‘tmp’ of size 8
+  125 |         BYTE tmp[8];
+      |              ^~~
+In function ‘BitConvert’,
+    inlined from ‘decode_filename’ at grfio.c:476:3,
+    inlined from ‘grfio_entryread’ at grfio.c:533:11,
+    inlined from ‘grfio_add’ at grfio.c:650:11:
+grfio.c:134:26: warning: array subscript ‘DWORD {aka long unsigned int}[0]’ is partly outside array bounds of ‘BYTE[8]’ {aka ‘unsigned char[8]’} [-Warray-bounds=]
+  134 |         *(DWORD*)(Src+4) = *(DWORD*)(tmp+4);
+      |         ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+grfio.c: In function ‘grfio_add’:
+grfio.c:125:14: note: at offset 4 into object ‘tmp’ of size 8
+  125 |         BYTE tmp[8];
+      |              ^~~
+In function ‘BitConvert’,
+    inlined from ‘decode_filename’ at grfio.c:478:3,
+    inlined from ‘grfio_entryread’ at grfio.c:533:11,
+    inlined from ‘grfio_add’ at grfio.c:650:11:
+grfio.c:126:38: warning: array subscript ‘DWORD {aka long unsigned int}[0]’ is partly outside array bounds of ‘BYTE[8]’ {aka ‘unsigned char[8]’} [-Warray-bounds=]
+  126 |         *(DWORD*)tmp=*(DWORD*)(tmp+4)=0;
+      |                      ~~~~~~~~~~~~~~~~^~
+grfio.c: In function ‘grfio_add’:
+grfio.c:125:14: note: at offset 4 into object ‘tmp’ of size 8
+  125 |         BYTE tmp[8];
+      |              ^~~
+In function ‘BitConvert’,
+    inlined from ‘decode_filename’ at grfio.c:478:3,
+    inlined from ‘grfio_entryread’ at grfio.c:533:11,
+    inlined from ‘grfio_add’ at grfio.c:650:11:
+grfio.c:134:26: warning: array subscript ‘DWORD {aka long unsigned int}[0]’ is partly outside array bounds of ‘BYTE[8]’ {aka ‘unsigned char[8]’} [-Warray-bounds=]
+  134 |         *(DWORD*)(Src+4) = *(DWORD*)(tmp+4);
+      |         ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+grfio.c: In function ‘grfio_add’:
+grfio.c:125:14: note: at offset 4 into object ‘tmp’ of size 8
+  125 |         BYTE tmp[8];
+      |              ^~~
+In file included from npc.c:6:
+npc.c: In function ‘mmo_map_npc_say’:
+core.h:33:44: warning: pointer targets in passing argument 1 of ‘strncpy’ differ in signedness [-Wpointer-sign]
+   33 | #define WBUFP(p,pos) (((unsigned char*)(p))+pos)
+      |                      ~~~~~~~~~~~~~~~~~~~~~~^~~~~
+      |                                            |
+      |                                            unsigned char *
+npc.c:33:11: note: in expansion of macro ‘WBUFP’
+   33 |   strncpy(WBUFP(buf,8), string,strlen(string)+1);
+      |           ^~~~~
+In file included from npc.c:1:
+/usr/include/string.h:44:19: note: expected ‘char * restrict’ but argument is of type ‘unsigned char *’
+   44 | char    *strncpy (char *__restrict, const char *__restrict, size_t);
+      |                   ^
+npc.c: In function ‘mmo_map_npc_select’:
+core.h:33:44: warning: pointer targets in passing argument 1 of ‘strncpy’ differ in signedness [-Wpointer-sign]
+   33 | #define WBUFP(p,pos) (((unsigned char*)(p))+pos)
+      |                      ~~~~~~~~~~~~~~~~~~~~~~^~~~~
+      |                                            |
+      |                                            unsigned char *
+npc.c:56:11: note: in expansion of macro ‘WBUFP’
+   56 |   strncpy(WBUFP(buf,8), string, strlen(string)+1);
+      |           ^~~~~
+/usr/include/string.h:44:19: note: expected ‘char * restrict’ but argument is of type ‘unsigned char *’
+   44 | char    *strncpy (char *__restrict, const char *__restrict, size_t);
+      |                   ^
+npc.c: In function ‘mons_walk’:
+npc.c:394:52: warning: pointer targets in passing argument 4 of ‘mmo_map_sendblock’ differ in signedness [-Wpointer-sign]
+  394 |           mmo_map_sendblock(m,bx-dx*AREA_SIZE,by+i,buf,packet_len_table[0x80],0,0);
+      |                                                    ^~~
+      |                                                    |
+      |                                                    unsigned char *
+In file included from npc.c:11:
+map2.h:12:49: note: expected ‘char *’ but argument is of type ‘unsigned char *’
+   12 | int mmo_map_sendblock(int m,int bx,int by,char *dat,int len,int srcfd,int wos);
+      |                                           ~~~~~~^~~
+npc.c:401:52: warning: pointer targets in passing argument 4 of ‘mmo_map_sendblock’ differ in signedness [-Wpointer-sign]
+  401 |           mmo_map_sendblock(m,bx+i,by-dy*AREA_SIZE,buf,packet_len_table[0x80],0,0);
+      |                                                    ^~~
+      |                                                    |
+      |                                                    unsigned char *
+map2.h:12:49: note: expected ‘char *’ but argument is of type ‘unsigned char *’
+   12 | int mmo_map_sendblock(int m,int bx,int by,char *dat,int len,int srcfd,int wos);
+      |                                           ~~~~~~^~~
+npc.c:424:52: warning: pointer targets in passing argument 4 of ‘mmo_map_sendblock’ differ in signedness [-Wpointer-sign]
+  424 |           mmo_map_sendblock(m,bx+dx*AREA_SIZE,by+i,buf,packet_len_table[0x7b],0,0);
+      |                                                    ^~~
+      |                                                    |
+      |                                                    unsigned char *
+map2.h:12:49: note: expected ‘char *’ but argument is of type ‘unsigned char *’
+   12 | int mmo_map_sendblock(int m,int bx,int by,char *dat,int len,int srcfd,int wos);
+      |                                           ~~~~~~^~~
+npc.c:431:52: warning: pointer targets in passing argument 4 of ‘mmo_map_sendblock’ differ in signedness [-Wpointer-sign]
+  431 |           mmo_map_sendblock(m,bx+i,by+dy*AREA_SIZE,buf,packet_len_table[0x7b],0,0);
+      |                                                    ^~~
+      |                                                    |
+      |                                                    unsigned char *
+map2.h:12:49: note: expected ‘char *’ but argument is of type ‘unsigned char *’
+   12 | int mmo_map_sendblock(int m,int bx,int by,char *dat,int len,int srcfd,int wos);
+      |                                           ~~~~~~^~~
+npc.c:482:72: warning: pointer targets in passing argument 4 of ‘mmo_map_sendarea_mxy’ differ in signedness [-Wpointer-sign]
+  482 |     mmo_map_sendarea_mxy(m,map_data[m].npc[n]->x,map_data[m].npc[n]->y,buf,packet_len_table[0x7b]);
+      |                                                                        ^~~
+      |                                                                        |
+      |                                                                        unsigned char *
+map2.h:15:50: note: expected ‘char *’ but argument is of type ‘unsigned char *’
+   15 | int mmo_map_sendarea_mxy(int m,int x,int y,char *dat,int len);
+      |                                            ~~~~~~^~~
+npc.c: In function ‘respawn_mons’:
+npc.c:513:70: warning: pointer targets in passing argument 4 of ‘mmo_map_sendarea_mxy’ differ in signedness [-Wpointer-sign]
+  513 |   mmo_map_sendarea_mxy(m,map_data[m].npc[n]->x,map_data[m].npc[n]->y,buf,packet_len_table[0x78]);
+      |                                                                      ^~~
+      |                                                                      |
+      |                                                                      unsigned char *
+map2.h:15:50: note: expected ‘char *’ but argument is of type ‘unsigned char *’
+   15 | int mmo_map_sendarea_mxy(int m,int x,int y,char *dat,int len);
+      |                                            ~~~~~~^~~
+npc.c: In function ‘respawn_mons2’:
+npc.c:526:70: warning: pointer targets in passing argument 4 of ‘mmo_map_sendarea_mxy’ differ in signedness [-Wpointer-sign]
+  526 |   mmo_map_sendarea_mxy(m,map_data[m].npc[n]->x,map_data[m].npc[n]->y,buf,packet_len_table[0x78]);
+      |                                                                      ^~~
+      |                                                                      |
+      |                                                                      unsigned char *
+map2.h:15:50: note: expected ‘char *’ but argument is of type ‘unsigned char *’
+   15 | int mmo_map_sendarea_mxy(int m,int x,int y,char *dat,int len);
+      |                                            ~~~~~~^~~
+In file included from npc.c:4:
+npc.c: In function ‘read_npcdata’:
+npc.c:734:50: warning: array subscript has type ‘char’ [-Wchar-subscripts]
+  734 |           for(j=strlen(buf)-1;j>=0 && isspace(buf[j]);j--);
+      |                                               ~~~^~~
+npc.c:750:69: warning: pointer targets in passing argument 1 of ‘parse_script’ differ in signedness [-Wpointer-sign]
+  750 |         map_data[i].npc[map_data[i].npc_num]->u.script=parse_script(buf);
+      |                                                                     ^~~
+      |                                                                     |
+      |                                                                     char *
+In file included from npc.c:10:
+script.h:1:44: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+    1 | unsigned char* parse_script(unsigned char *src);
+      |                             ~~~~~~~~~~~~~~~^~~
+npc.c:750:55: warning: pointer targets in assignment from ‘unsigned char *’ to ‘char *’ differ in signedness [-Wpointer-sign]
+  750 |         map_data[i].npc[map_data[i].npc_num]->u.script=parse_script(buf);
+      |                                                       ^
+npc.c: In function ‘mmo_map_npc_say’:
+npc.c:33:3: warning: ‘strncpy’ specified bound depends on the length of the source argument [-Wstringop-truncation]
+   33 |   strncpy(WBUFP(buf,8), string,strlen(string)+1);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npc.c:33:32: note: length computed here
+   33 |   strncpy(WBUFP(buf,8), string,strlen(string)+1);
+      |                                ^~~~~~~~~~~~~~
+npc.c: In function ‘mmo_map_npc_select’:
+npc.c:56:3: warning: ‘strncpy’ specified bound depends on the length of the source argument [-Wstringop-truncation]
+   56 |   strncpy(WBUFP(buf,8), string, strlen(string)+1);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npc.c:56:33: note: length computed here
+   56 |   strncpy(WBUFP(buf,8), string, strlen(string)+1);
+      |                                 ^~~~~~~~~~~~~~
+itemdb.c: In function ‘itemdb_view_point’:
+itemdb.c:216:43: warning: variable ‘tcount’ set but not used [-Wunused-but-set-variable]
+  216 |         int t_nameid,view,fcount,scount,i,tcount,j;
+      |                                           ^~~~~~
+itemdb.c: In function ‘item_database’:
+itemdb.c:268:20: warning: variable ‘i’ set but not used [-Wunused-but-set-variable]
+  268 |         int fcount,i;
+      |                    ^
+itemdb.c:268:13: warning: variable ‘fcount’ set but not used [-Wunused-but-set-variable]
+  268 |         int fcount,i;
+      |             ^~~~~~
+skill_db.c: In function ‘skill_database’:
+skill_db.c:14:20: warning: variable ‘i’ set but not used [-Wunused-but-set-variable]
+   14 |         int fcount,i;
+      |                    ^
+skill_db.c:14:13: warning: variable ‘fcount’ set but not used [-Wunused-but-set-variable]
+   14 |         int fcount,i;
+      |             ^~~~~~
+script.c:36:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   36 |   {"mes",C_MES,"s"},
+      |    ^~~~~
+script.c:36:4: note: (near initialization for ‘com_tbl[0].str’)
+script.c:36:16: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   36 |   {"mes",C_MES,"s"},
+      |                ^~~
+script.c:36:16: note: (near initialization for ‘com_tbl[0].arg’)
+script.c:37:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   37 |   {"next",C_NEXT,""},
+      |    ^~~~~~
+script.c:37:4: note: (near initialization for ‘com_tbl[1].str’)
+script.c:37:18: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   37 |   {"next",C_NEXT,""},
+      |                  ^~
+script.c:37:18: note: (near initialization for ‘com_tbl[1].arg’)
+script.c:38:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   38 |   {"close",C_CLOSE,""},
+      |    ^~~~~~~
+script.c:38:4: note: (near initialization for ‘com_tbl[2].str’)
+script.c:38:20: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   38 |   {"close",C_CLOSE,""},
+      |                    ^~
+script.c:38:20: note: (near initialization for ‘com_tbl[2].arg’)
+script.c:39:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   39 |   {"menu",C_MENU,"m"},
+      |    ^~~~~~
+script.c:39:4: note: (near initialization for ‘com_tbl[3].str’)
+script.c:39:18: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   39 |   {"menu",C_MENU,"m"},
+      |                  ^~~
+script.c:39:18: note: (near initialization for ‘com_tbl[3].arg’)
+script.c:40:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   40 |   {"goto",C_GOTO,"l"},
+      |    ^~~~~~
+script.c:40:4: note: (near initialization for ‘com_tbl[4].str’)
+script.c:40:18: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   40 |   {"goto",C_GOTO,"l"},
+      |                  ^~~
+script.c:40:18: note: (near initialization for ‘com_tbl[4].arg’)
+script.c:41:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   41 |   {"jobchange",C_JOBCHANGE,"i"},
+      |    ^~~~~~~~~~~
+script.c:41:4: note: (near initialization for ‘com_tbl[5].str’)
+script.c:41:28: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   41 |   {"jobchange",C_JOBCHANGE,"i"},
+      |                            ^~~
+script.c:41:28: note: (near initialization for ‘com_tbl[5].arg’)
+script.c:42:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   42 |   {"input",C_INPUT,""},
+      |    ^~~~~~~
+script.c:42:4: note: (near initialization for ‘com_tbl[6].str’)
+script.c:42:20: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   42 |   {"input",C_INPUT,""},
+      |                    ^~
+script.c:42:20: note: (near initialization for ‘com_tbl[6].arg’)
+script.c:43:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   43 |   {"warp",C_WARP,"sii"},
+      |    ^~~~~~
+script.c:43:4: note: (near initialization for ‘com_tbl[7].str’)
+script.c:43:18: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   43 |   {"warp",C_WARP,"sii"},
+      |                  ^~~~~
+script.c:43:18: note: (near initialization for ‘com_tbl[7].arg’)
+script.c:44:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   44 |   {"setlook",C_SETLOOK,"ii"},
+      |    ^~~~~~~~~
+script.c:44:4: note: (near initialization for ‘com_tbl[8].str’)
+script.c:44:24: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   44 |   {"setlook",C_SETLOOK,"ii"},
+      |                        ^~~~
+script.c:44:24: note: (near initialization for ‘com_tbl[8].arg’)
+script.c:45:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   45 |   {"set",C_SET,"Ie"},
+      |    ^~~~~
+script.c:45:4: note: (near initialization for ‘com_tbl[9].str’)
+script.c:45:16: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   45 |   {"set",C_SET,"Ie"},
+      |                ^~~~
+script.c:45:16: note: (near initialization for ‘com_tbl[9].arg’)
+script.c:46:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   46 |   {"if",C_IF,"eg"},
+      |    ^~~~
+script.c:46:4: note: (near initialization for ‘com_tbl[10].str’)
+script.c:46:14: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   46 |   {"if",C_IF,"eg"},
+      |              ^~~~
+script.c:46:14: note: (near initialization for ‘com_tbl[10].arg’)
+script.c:47:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   47 |   {"getitem",C_GETITEM,"ii"},
+      |    ^~~~~~~~~
+script.c:47:4: note: (near initialization for ‘com_tbl[11].str’)
+script.c:47:24: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   47 |   {"getitem",C_GETITEM,"ii"},
+      |                        ^~~~
+script.c:47:24: note: (near initialization for ‘com_tbl[11].arg’)
+script.c:48:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   48 |   {"delitem",C_DELITEM,"ii"},
+      |    ^~~~~~~~~
+script.c:48:4: note: (near initialization for ‘com_tbl[12].str’)
+script.c:48:24: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   48 |   {"delitem",C_DELITEM,"ii"},
+      |                        ^~~~
+script.c:48:24: note: (near initialization for ‘com_tbl[12].arg’)
+script.c:49:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   49 |   {"cutin",C_CUTIN,"si"},
+      |    ^~~~~~~
+script.c:49:4: note: (near initialization for ‘com_tbl[13].str’)
+script.c:49:20: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   49 |   {"cutin",C_CUTIN,"si"},
+      |                    ^~~~
+script.c:49:20: note: (near initialization for ‘com_tbl[13].arg’)
+script.c:50:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   50 |   {"viewpoint",C_VIEWPOINT,"iiiii"},
+      |    ^~~~~~~~~~~
+script.c:50:4: note: (near initialization for ‘com_tbl[14].str’)
+script.c:50:28: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   50 |   {"viewpoint",C_VIEWPOINT,"iiiii"},
+      |                            ^~~~~~~
+script.c:50:28: note: (near initialization for ‘com_tbl[14].arg’)
+script.c:51:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   51 |   {"monster",C_MONSTER,"sii"},
+      |    ^~~~~~~~~
+script.c:51:4: note: (near initialization for ‘com_tbl[15].str’)
+script.c:51:24: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   51 |   {"monster",C_MONSTER,"sii"},
+      |                        ^~~~~
+script.c:51:24: note: (near initialization for ‘com_tbl[15].arg’)
+script.c:52:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   52 |   {"save",C_SAVE,"sii"},
+      |    ^~~~~~
+script.c:52:4: note: (near initialization for ‘com_tbl[16].str’)
+script.c:52:18: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   52 |   {"save",C_SAVE,"sii"},
+      |                  ^~~~~
+script.c:52:18: note: (near initialization for ‘com_tbl[16].arg’)
+script.c:60:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   60 |   {"Job_Novice",C_INT,0},
+      |    ^~~~~~~~~~~~
+script.c:60:4: note: (near initialization for ‘alias_tbl[0].str’)
+script.c:61:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   61 |   {"Job_Swordman",C_INT,1},
+      |    ^~~~~~~~~~~~~~
+script.c:61:4: note: (near initialization for ‘alias_tbl[1].str’)
+script.c:62:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   62 |   {"Job_Mage",C_INT,2},
+      |    ^~~~~~~~~~
+script.c:62:4: note: (near initialization for ‘alias_tbl[2].str’)
+script.c:63:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   63 |   {"Job_Archer",C_INT,3},
+      |    ^~~~~~~~~~~~
+script.c:63:4: note: (near initialization for ‘alias_tbl[3].str’)
+script.c:64:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   64 |   {"Job_Acolyte",C_INT,4},
+      |    ^~~~~~~~~~~~~
+script.c:64:4: note: (near initialization for ‘alias_tbl[4].str’)
+script.c:65:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   65 |   {"Job_Merchant",C_INT,5},
+      |    ^~~~~~~~~~~~~~
+script.c:65:4: note: (near initialization for ‘alias_tbl[5].str’)
+script.c:66:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   66 |   {"Job_Thief",C_INT,6},
+      |    ^~~~~~~~~~~
+script.c:66:4: note: (near initialization for ‘alias_tbl[6].str’)
+script.c:67:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   67 |   {"Job_Knight",C_INT,7},
+      |    ^~~~~~~~~~~~
+script.c:67:4: note: (near initialization for ‘alias_tbl[7].str’)
+script.c:68:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   68 |   {"Job_Priest",C_INT,8},
+      |    ^~~~~~~~~~~~
+script.c:68:4: note: (near initialization for ‘alias_tbl[8].str’)
+script.c:69:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   69 |   {"Job_Wizard",C_INT,9},
+      |    ^~~~~~~~~~~~
+script.c:69:4: note: (near initialization for ‘alias_tbl[9].str’)
+script.c:70:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   70 |   {"Job_Blacksmith",C_INT,10},
+      |    ^~~~~~~~~~~~~~~~
+script.c:70:4: note: (near initialization for ‘alias_tbl[10].str’)
+script.c:71:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   71 |   {"Job_Hunter",C_INT,11},
+      |    ^~~~~~~~~~~~
+script.c:71:4: note: (near initialization for ‘alias_tbl[11].str’)
+script.c:72:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   72 |   {"Job_Assassin",C_INT,12},
+      |    ^~~~~~~~~~~~~~
+script.c:72:4: note: (near initialization for ‘alias_tbl[12].str’)
+script.c:73:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   73 |   {"Job_Kami",C_INT,100},
+      |    ^~~~~~~~~~
+script.c:73:4: note: (near initialization for ‘alias_tbl[13].str’)
+script.c:74:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   74 |   {"S_FLAG",C_LOCAL,0},
+      |    ^~~~~~~~
+script.c:74:4: note: (near initialization for ‘alias_tbl[14].str’)
+script.c:75:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   75 |   {"Script_flag_num",C_PARAM,SP_SCRIPT_FLAG},
+      |    ^~~~~~~~~~~~~~~~~
+script.c:75:4: note: (near initialization for ‘alias_tbl[15].str’)
+script.c:76:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   76 |   {"SkillPoint",C_PARAM,SP_SKILLPOINT},
+      |    ^~~~~~~~~~~~
+script.c:76:4: note: (near initialization for ‘alias_tbl[16].str’)
+script.c:77:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   77 |   {"StatusPoint",C_PARAM,SP_STATUSPOINT},
+      |    ^~~~~~~~~~~~~
+script.c:77:4: note: (near initialization for ‘alias_tbl[17].str’)
+script.c:78:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   78 |   {"Zeny",C_PARAM,SP_ZENY},
+      |    ^~~~~~
+script.c:78:4: note: (near initialization for ‘alias_tbl[18].str’)
+script.c:79:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   79 |   {"BaseLevel",C_PARAM,SP_BASELEVEL},
+      |    ^~~~~~~~~~~
+script.c:79:4: note: (near initialization for ‘alias_tbl[19].str’)
+script.c:80:4: warning: pointer targets in initialization of ‘unsigned char *’ from ‘char *’ differ in signedness [-Wpointer-sign]
+   80 |   {"JobLevel",C_PARAM,SP_JOBLEVEL},
+      |    ^~~~~~~~~~
+script.c:80:4: note: (near initialization for ‘alias_tbl[20].str’)
+script.c: In function ‘search_str’:
+script.c:116:39: warning: pointer targets in passing argument 2 of ‘strcmp’ differ in signedness [-Wpointer-sign]
+  116 |     if(strcmp(str_buf+str_data[i].str,p)==0){
+      |                                       ^
+      |                                       |
+      |                                       unsigned char *
+In file included from script.c:3:
+/usr/include/string.h:36:32: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   36 | int      strcmp (const char *, const char *);
+      |                                ^~~~~~~~~~~~
+script.c: In function ‘add_str’:
+script.c:133:41: warning: pointer targets in passing argument 2 of ‘strcmp’ differ in signedness [-Wpointer-sign]
+  133 |       if(strcmp(str_buf+str_data[i].str,p)==0){
+      |                                         ^
+      |                                         |
+      |                                         unsigned char *
+/usr/include/string.h:36:32: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   36 | int      strcmp (const char *, const char *);
+      |                                ^~~~~~~~~~~~
+script.c:146:24: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
+  146 |   while(str_pos+strlen(p)+1>=str_size){
+      |                        ^
+      |                        |
+      |                        unsigned char *
+/usr/include/string.h:41:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   41 | size_t   strlen (const char *);
+      |                  ^~~~~~~~~~~~
+script.c:150:26: warning: pointer targets in passing argument 2 of ‘strcpy’ differ in signedness [-Wpointer-sign]
+  150 |   strcpy(str_buf+str_pos,p);
+      |                          ^
+      |                          |
+      |                          unsigned char *
+/usr/include/string.h:38:36: note: expected ‘const char * restrict’ but argument is of type ‘unsigned char *’
+   38 | char    *strcpy (char *__restrict, const char *__restrict);
+      |                                    ^
+script.c:155:19: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
+  155 |   str_pos+=strlen(p)+1;
+      |                   ^
+      |                   |
+      |                   unsigned char *
+/usr/include/string.h:41:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   41 | size_t   strlen (const char *);
+      |                  ^~~~~~~~~~~~
+script.c: In function ‘parse_int’:
+script.c:267:15: warning: pointer targets in passing argument 1 of ‘strtoul’ differ in signedness [-Wpointer-sign]
+  267 |     i=strtoul(p,(char**)&p,0);
+      |               ^
+      |               |
+      |               unsigned char *
+In file included from script.c:2:
+/usr/include/stdlib.h:173:47: note: expected ‘const char * restrict’ but argument is of type ‘unsigned char *’
+  173 | unsigned long strtoul (const char *__restrict __n, char **__restrict __end_PTR, int __base);
+      |                        ~~~~~~~~~~~~~~~~~~~~~~~^~~
+script.c:271:16: warning: pointer targets in passing argument 1 of ‘strtoul’ differ in signedness [-Wpointer-sign]
+  271 |     i=strtoul(p+1,(char**)&p,0);
+      |               ~^~
+      |                |
+      |                unsigned char *
+/usr/include/stdlib.h:173:47: note: expected ‘const char * restrict’ but argument is of type ‘unsigned char *’
+  173 | unsigned long strtoul (const char *__restrict __n, char **__restrict __end_PTR, int __base);
+      |                        ~~~~~~~~~~~~~~~~~~~~~~~^~~
+script.c: In function ‘parse_simpleexpr’:
+script.c:302:40: warning: pointer targets in passing argument 2 of ‘comcmp’ differ in signedness [-Wpointer-sign]
+  302 |   } else if((func=C_COUNTITEM,comcmp(p,"countitem")==0)||
+      |                                        ^~~~~~~~~~~
+      |                                        |
+      |                                        char *
+script.c:251:46: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+  251 | int comcmp(unsigned char *str,unsigned char *com)
+      |                               ~~~~~~~~~~~~~~~^~~
+script.c:303:40: warning: pointer targets in passing argument 2 of ‘comcmp’ differ in signedness [-Wpointer-sign]
+  303 |             (func=C_READPARAM,comcmp(p,"readparam")==0)){
+      |                                        ^~~~~~~~~~~
+      |                                        |
+      |                                        char *
+script.c:251:46: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+  251 | int comcmp(unsigned char *str,unsigned char *com)
+      |                               ~~~~~~~~~~~~~~~^~~
+script.c: In function ‘parse_arg’:
+script.c:448:19: warning: pointer targets in passing argument 2 of ‘comcmp’ differ in signedness [-Wpointer-sign]
+  448 |       if(comcmp(p,"goto")){
+      |                   ^~~~~~
+      |                   |
+      |                   char *
+script.c:251:46: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+  251 | int comcmp(unsigned char *str,unsigned char *com)
+      |                               ~~~~~~~~~~~~~~~^~~
+script.c: In function ‘run_script’:
+script.c:768:9: warning: pointer targets in assignment from ‘char *’ to ‘unsigned char *’ differ in signedness [-Wpointer-sign]
+  768 |   script=map_data[sd->mapno].npc[sd->npc_n]->u.script;
+      |         ^
+script.c:779:60: warning: pointer targets in passing argument 4 of ‘mmo_map_npc_say’ differ in signedness [-Wpointer-sign]
+  779 |       len=mmo_map_npc_say(fd,WFIFOP(fd,0),sd->npc_id,script+pos);
+      |                                                      ~~~~~~^~~~
+      |                                                            |
+      |                                                            unsigned char *
+In file included from script.c:8:
+npc.h:18:72: note: expected ‘char *’ but argument is of type ‘unsigned char *’
+   18 | int mmo_map_npc_say(int fd, unsigned char* buf,unsigned long id, char *string);
+      |                                                                  ~~~~~~^~~~~~
+script.c:781:25: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
+  781 |       pos+=strlen(script+pos)+1;
+      |                   ~~~~~~^~~~
+      |                         |
+      |                         unsigned char *
+/usr/include/string.h:41:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   41 | size_t   strlen (const char *);
+      |                  ^~~~~~~~~~~~
+script.c:794:63: warning: pointer targets in passing argument 4 of ‘mmo_map_npc_select’ differ in signedness [-Wpointer-sign]
+  794 |       len=mmo_map_npc_select(fd,WFIFOP(fd,0),sd->npc_id,script+pos);
+      |                                                         ~~~~~~^~~~
+      |                                                               |
+      |                                                               unsigned char *
+npc.h:21:76: note: expected ‘char *’ but argument is of type ‘unsigned char *’
+   21 | int mmo_map_npc_select(int fd, unsigned char* buf, unsigned long id, char *string);
+      |                                                                      ~~~~~~^~~~~~
+script.c:796:25: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
+  796 |       pos+=strlen(script+pos)+1;
+      |                   ~~~~~~^~~~
+      |                         |
+      |                         unsigned char *
+/usr/include/string.h:41:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   41 | size_t   strlen (const char *);
+      |                  ^~~~~~~~~~~~
+In file included from script.c:7:
+core.h:28:67: warning: pointer targets in passing argument 2 of ‘mmo_map_sendarea’ differ in signedness [-Wpointer-sign]
+   28 | #define WFIFOP(fd,pos) (session[fd]->wdata+session[fd]->wdata_size+pos)
+      |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+      |                                                                   |
+      |                                                                   unsigned char *
+script.c:828:37: note: in expansion of macro ‘WFIFOP’
+  828 |       if(len>0) mmo_map_sendarea(fd,WFIFOP(fd,0),len,0);
+      |                                     ^~~~~~
+In file included from script.c:11:
+map2.h:13:38: note: expected ‘char *’ but argument is of type ‘unsigned char *’
+   13 | int mmo_map_sendarea(int srcfd,char *dat,int len,int wos);
+      |                                ~~~~~~^~~
+script.c:832:25: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
+  832 |       pos+=strlen(script+pos)+1;
+      |                   ~~~~~~^~~~
+      |                         |
+      |                         unsigned char *
+/usr/include/string.h:41:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   41 | size_t   strlen (const char *);
+      |                  ^~~~~~~~~~~~
+script.c:835:31: warning: pointer targets in passing argument 3 of ‘mmo_map_changemap’ differ in signedness [-Wpointer-sign]
+  835 |       mmo_map_changemap(fd,sd,s1,i1,i2,2);
+      |                               ^~
+      |                               |
+      |                               unsigned char *
+map2.h:57:64: note: expected ‘char *’ but argument is of type ‘unsigned char *’
+   57 | int mmo_map_changemap(int id,struct map_session_data *sd,char *mapname,int x,int y,int type);
+      |                                                          ~~~~~~^~~~~~~
+script.c:901:25: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
+  901 |       pos+=strlen(script+pos)+1;
+      |                   ~~~~~~^~~~
+      |                         |
+      |                         unsigned char *
+/usr/include/string.h:41:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   41 | size_t   strlen (const char *);
+      |                  ^~~~~~~~~~~~
+script.c:903:41: warning: pointer targets in passing argument 3 of ‘mmo_map_cutin’ differ in signedness [-Wpointer-sign]
+  903 |       len=mmo_map_cutin(fd,WFIFOP(fd,0),s1,i1);
+      |                                         ^~
+      |                                         |
+      |                                         unsigned char *
+script.c:569:51: note: expected ‘char *’ but argument is of type ‘unsigned char *’
+  569 | int mmo_map_cutin(int fd,unsigned char* buf,char *img_name,int type)
+      |                                             ~~~~~~^~~~~~~~
+script.c:909:35: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
+  909 |                 pos+=strlen(script+pos)+1;
+      |                             ~~~~~~^~~~
+      |                                   |
+      |                                   unsigned char *
+/usr/include/string.h:41:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   41 | size_t   strlen (const char *);
+      |                  ^~~~~~~~~~~~
+script.c:940:25: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
+  940 |       pos+=strlen(script+pos)+1;
+      |                   ~~~~~~^~~~
+      |                         |
+      |                         unsigned char *
+/usr/include/string.h:41:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   41 | size_t   strlen (const char *);
+      |                  ^~~~~~~~~~~~
+script.c:943:40: warning: pointer targets in passing argument 2 of ‘strcpy’ differ in signedness [-Wpointer-sign]
+  943 |       strcpy(sd->status.save_point.map,s1);
+      |                                        ^~
+      |                                        |
+      |                                        unsigned char *
+/usr/include/string.h:38:36: note: expected ‘const char * restrict’ but argument is of type ‘unsigned char *’
+   38 | char    *strcpy (char *__restrict, const char *__restrict);
+      |                                    ^
+party.c: In function ‘create_party’:
+party.c:33:39: warning: pointer targets in passing argument 2 of ‘strcmp’ differ in signedness [-Wpointer-sign]
+   33 |     if(strcmp(party_dat[i].party_name,dat)==0)//���O�̏d�����Ȃ����`�F�b�N
+      |                                       ^~~
+      |                                       |
+      |                                       unsigned char *
+In file included from party.c:4:
+/usr/include/string.h:36:32: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
+   36 | int      strcmp (const char *, const char *);
+      |                                ^~~~~~~~~~~~
+party.c:45:34: warning: pointer targets in passing argument 2 of ‘strcpy’ differ in signedness [-Wpointer-sign]
+   45 |   strcpy(party_dat[i].party_name,dat);
+      |                                  ^~~
+      |                                  |
+      |                                  unsigned char *
+/usr/include/string.h:38:36: note: expected ‘const char * restrict’ but argument is of type ‘unsigned char *’
+   38 | char    *strcpy (char *__restrict, const char *__restrict);
+      |                                    ^
+party.c:23:34: warning: variable ‘sd’ set but not used [-Wunused-but-set-variable]
+   23 |         struct map_session_data *sd;
+      |                                  ^~
+pet.c: In function ‘pet_init’:
+pet.c:22:25: warning: value computed is not used [-Wunused-value]
+   22 |                         *id++;
+      |                         ^~~~~

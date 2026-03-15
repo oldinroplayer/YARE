@@ -10,3 +10,29 @@ client connection request Lemming from 127.0.0.1
 auth ok 2003-05-26 22:13:49.523 Lemming bastard 0
 client connection request Lemming from 127.0.0.1
 auth ok 2003-05-26 22:19:06.291 Lemming bastard 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-15 19:06:03.965 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-15 19:13:30.233 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-15 19:40:09.298 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-15 20:43:50.940 admin admin 0
+client connection request test from 127.0.0.1
+auth ok 2026-03-15 20:44:08.470 test test 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-15 20:50:25.303 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-15 20:51:08.656 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-15 20:51:25.582 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-15 20:51:39.191 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-15 20:54:37.361 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-15 21:03:52.533 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-15 21:14:06.273 admin admin 0
+client connection request test from 127.0.0.1
+auth ok 2026-03-15 21:14:40.167 test test 0
