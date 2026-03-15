@@ -1,15 +1,16 @@
-CFLAGS = -O9 -Wall -g
+CFLAGS = -O9 -Wall -g -fcommon
+LDFLAGS = -Wl,--allow-multiple-definition
 
 all: login-server char-server map-server
 
 login-server: login2.o core.o
-	$(CC) -o $@ $^
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 char-server: char2.o core.o
-	$(CC) -o $@ $^
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 map-server: map2.o core.o save.o grfio.o npc.o itemdb.o skill_db.o script.o party.o guild.o pet.o
-	$(CC) -o $@ $^ -lz
+	$(CC) -o $@ $^ -lz $(LDFLAGS)
 
 login2.o: login2.c core.h mmo.h
 char2.o: char2.c core.h mmo.h char2.h

@@ -1,4 +1,4 @@
 rm ./*.o
-rm ./map2.exe
-rm ./char2.exe
-rm ./login2.exe
+rm ./map-server.exe
+rm ./char-server.exe
+rm ./login-server.exe

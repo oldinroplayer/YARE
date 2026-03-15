@@ -38,7 +38,7 @@
 #define TIMER_ONCE_AUTODEL 0
 #define TIMER_ONCE 1
 #define TIMER_INTERVAL 2
-struct TimerData {
+extern struct TimerData {
   unsigned int tick;
   int (*func)(int,unsigned int,int,int);
   int id;
@@ -47,7 +47,7 @@ struct TimerData {
   int interval;
 } **timer_data;
 
-struct socket_data{
+extern struct socket_data{
   int eof;
   unsigned char *rdata,*wdata;
   int max_rdata,max_wdata;
@@ -60,9 +60,9 @@ struct socket_data{
   void* session_data;
 } *session[FD_SETSIZE];
 
-int rfifo_size,wfifo_size;
-int (*default_func_parse)(int);
-void (*term_func)(void);
+extern int rfifo_size,wfifo_size;
+extern int (*default_func_parse)(int);
+extern void (*term_func)(void);
 
 int do_init(int,char**);
 int make_listen_port(int);

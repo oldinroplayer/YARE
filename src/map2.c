@@ -452,6 +452,7 @@ int mmo_map_sendall(int srcfd,char *dat,int len,int wos)
   int fd;
 
   srcsd=session[srcfd]->session_data;
+  (void)srcsd;
   for(fd=0;fd<FD_SETSIZE;fd++){
     if(!session[fd] || !(dstsd=session[fd]->session_data))
       continue;

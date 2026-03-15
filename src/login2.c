@@ -140,8 +140,10 @@ int mmo_auth( struct mmo_account* account )
       auth_dat=realloc(auth_dat,sizeof(auth_dat[0])*auth_max);
     }
     auth_dat[i].account_id=account_id_count++;
-    strncpy(auth_dat[i].userid,account->userid,24);
-    strncpy(auth_dat[i].pass,account->passwd,24);
+    strncpy(auth_dat[i].userid, account->userid, 24);
+	auth_dat[i].userid[23] = '\0';
+    strncpy(auth_dat[i].pass, account->passwd, 24);
+	auth_dat[i].pass[23] = '\0';
     auth_dat[i].sex=account->userid[len+1]=='M';
     auth_dat[i].logincount=0;
     auth_num++;
@@ -246,8 +248,8 @@ int parse_login(int fd)
 	  fclose(logfp);
 	}
       }
-      account.userid = RFIFOP(fd,6);
-      account.passwd = RFIFOP(fd,30);
+      account.userid = (char*)RFIFOP(fd,6);
+      account.passwd = (char*)RFIFOP(fd,30);
       result=mmo_auth(&account);
       if(result==100){
 	server_num=0;
@@ -299,8 +301,8 @@ int parse_login(int fd)
 	  fclose(logfp);
 	}
       }
-      account.userid = RFIFOP(fd,2);
-      account.passwd = RFIFOP(fd,26);
+      account.userid = (char*)RFIFOP(fd,2);
+      account.passwd = (char*)RFIFOP(fd,26);
       result = mmo_auth(&account);
       if(result == 100 && account.sex==2 && account.account_id<MAX_SERVERS && server_fd[account.account_id]<0){
 	memcpy(server[account.account_id].name,RFIFOP(fd,60),16);

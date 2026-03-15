@@ -12,6 +12,9 @@
 #include <netinet/tcp.h>
 #include "core.h"
 
+struct TimerData **timer_data;
+struct socket_data *session[FD_SETSIZE];
+
 int rfifo_size=32768;
 int wfifo_size=32768;
 
