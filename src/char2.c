@@ -300,7 +300,7 @@ int make_new_char(int fd,unsigned char *dat)
   sd=session[fd]->session_data;
 
   for(i=0;i<char_num;i++){
-    if(strcmp(char_dat[i].name,dat)==0 || (char_dat[i].account_id==sd->account_id && char_dat[i].char_num==dat[30]))
+    if(strcmp(char_dat[i].name,(char*)dat)==0 || (char_dat[i].account_id==sd->account_id && char_dat[i].char_num==dat[30]))
       break;
   }
   if(i!=char_num)
@@ -312,7 +312,7 @@ int make_new_char(int fd,unsigned char *dat)
   char_dat[i].char_id=char_id_count++;
   char_dat[i].account_id=sd->account_id;
   char_dat[i].char_num=dat[30];
-  strcpy(char_dat[i].name,dat);
+  strcpy(char_dat[i].name,(char*)dat);
   char_dat[i].class=0;
   char_dat[i].base_level=1;
   char_dat[i].job_level=1;
@@ -937,7 +937,7 @@ int parse_char(int fd)
 	if(server_fd[i]<0)
 	  break;
       }
-      if(i==MAX_SERVERS || strcmp(RFIFOP(fd,2),userid) || strcmp(RFIFOP(fd,26),passwd)){
+      if(i==MAX_SERVERS || strcmp((char*)RFIFOP(fd,2),userid) || strcmp((char*)RFIFOP(fd,26),passwd)){
 	WFIFOB(fd,2)=3;
 	WFIFOSET(fd,3);
 	RFIFOSKIP(fd,60);

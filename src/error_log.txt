@@ -6,48 +6,6 @@ core.c: In function ‘make_connection’:
 core.c:185:7: warning: variable ‘result’ set but not used [-Wunused-but-set-variable]
   185 |   int result;
       |       ^~~~~~
-char2.c: In function ‘make_new_char’:
-char2.c:303:32: warning: pointer targets in passing argument 2 of ‘strcmp’ differ in signedness [-Wpointer-sign]
-  303 |     if(strcmp(char_dat[i].name,dat)==0 || (char_dat[i].account_id==sd->account_id && char_dat[i].char_num==dat[30]))
-      |                                ^~~
-      |                                |
-      |                                unsigned char *
-In file included from char2.c:11:
-/usr/include/string.h:36:32: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
-   36 | int      strcmp (const char *, const char *);
-      |                                ^~~~~~~~~~~~
-char2.c:315:27: warning: pointer targets in passing argument 2 of ‘strcpy’ differ in signedness [-Wpointer-sign]
-  315 |   strcpy(char_dat[i].name,dat);
-      |                           ^~~
-      |                           |
-      |                           unsigned char *
-/usr/include/string.h:38:36: note: expected ‘const char * restrict’ but argument is of type ‘unsigned char *’
-   38 | char    *strcpy (char *__restrict, const char *__restrict);
-      |                                    ^
-In file included from char2.c:14:
-char2.c: In function ‘parse_char’:
-core.h:14:66: warning: pointer targets in passing argument 1 of ‘strcmp’ differ in signedness [-Wpointer-sign]
-   14 | #define RFIFOP(fd,pos) (session[fd]->rdata+session[fd]->rdata_pos+pos)
-      |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
-      |                                                                  |
-      |                                                                  unsigned char *
-char2.c:940:35: note: in expansion of macro ‘RFIFOP’
-  940 |       if(i==MAX_SERVERS || strcmp(RFIFOP(fd,2),userid) || strcmp(RFIFOP(fd,26),passwd)){
-      |                                   ^~~~~~
-/usr/include/string.h:36:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
-   36 | int      strcmp (const char *, const char *);
-      |                  ^~~~~~~~~~~~
-core.h:14:66: warning: pointer targets in passing argument 1 of ‘strcmp’ differ in signedness [-Wpointer-sign]
-   14 | #define RFIFOP(fd,pos) (session[fd]->rdata+session[fd]->rdata_pos+pos)
-      |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
-      |                                                                  |
-      |                                                                  unsigned char *
-char2.c:940:66: note: in expansion of macro ‘RFIFOP’
-  940 |       if(i==MAX_SERVERS || strcmp(RFIFOP(fd,2),userid) || strcmp(RFIFOP(fd,26),passwd)){
-      |                                                                  ^~~~~~
-/usr/include/string.h:36:18: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
-   36 | int      strcmp (const char *, const char *);
-      |                  ^~~~~~~~~~~~
 In file included from map2.c:14:
 map2.c: In function ‘mmo_map_set00d7’:
 core.h:33:44: warning: pointer targets in passing argument 1 of ‘strcpy’ differ in signedness [-Wpointer-sign]
