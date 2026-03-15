@@ -20,17 +20,17 @@ int party_id_count;
 int create_party(int fd,unsigned char *dat){
 	FILE *logfp;
 	int i;
-	struct map_session_data *sd;
+	// struct map_session_data *sd;
 
   logfp=fopen("party.log","a");
   if(logfp){
     fprintf(logfp,"make new party %d %s\n",fd,dat);
     fclose(logfp);
   }
-  sd=session[fd]->session_data;
+  // sd=session[fd]->session_data;
 	printf("パーティー作る～HP\n");
-  for(i=0;i<party_num;i++){
-    if(strcmp(party_dat[i].party_name,dat)==0)//名前の重複がないかチェック
+  for(i=0; i<party_num; i++){
+    if(strcmp(party_dat[i].party_name, (char *)dat)==0)//名前の重複がないかチェック
       break;
   }
   if(i!=party_num)
@@ -42,7 +42,7 @@ int create_party(int fd,unsigned char *dat){
   }
   printf("値の代入\n");
   party_dat[i].party_id=party_id_count++;
-  strcpy(party_dat[i].party_name,dat);
+  strcpy(party_dat[i].party_name, (char *)dat);
   party_num++;
 
   mmo_party_sync();

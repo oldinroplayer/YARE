@@ -1743,24 +1743,3 @@ script.c:943:40: warning: pointer targets in passing argument 2 of â€˜strcpyâ€™ 
 /usr/include/string.h:38:36: note: expected â€˜const char * restrictâ€™ but argument is of type â€˜unsigned char *â€™
    38 | char    *strcpy (char *__restrict, const char *__restrict);
       |                                    ^
-party.c: In function â€˜create_partyâ€™:
-party.c:33:39: warning: pointer targets in passing argument 2 of â€˜strcmpâ€™ differ in signedness [-Wpointer-sign]
-   33 |     if(strcmp(party_dat[i].party_name,dat)==0)//–¼‘O‚Ìd•¡‚ª‚È‚¢‚©ƒ`ƒFƒbƒN
-      |                                       ^~~
-      |                                       |
-      |                                       unsigned char *
-In file included from party.c:4:
-/usr/include/string.h:36:32: note: expected â€˜const char *â€™ but argument is of type â€˜unsigned char *â€™
-   36 | int      strcmp (const char *, const char *);
-      |                                ^~~~~~~~~~~~
-party.c:45:34: warning: pointer targets in passing argument 2 of â€˜strcpyâ€™ differ in signedness [-Wpointer-sign]
-   45 |   strcpy(party_dat[i].party_name,dat);
-      |                                  ^~~
-      |                                  |
-      |                                  unsigned char *
-/usr/include/string.h:38:36: note: expected â€˜const char * restrictâ€™ but argument is of type â€˜unsigned char *â€™
-   38 | char    *strcpy (char *__restrict, const char *__restrict);
-      |                                    ^
-party.c:23:34: warning: variable â€˜sdâ€™ set but not used [-Wunused-but-set-variable]
-   23 |         struct map_session_data *sd;
-      |                                  ^~
