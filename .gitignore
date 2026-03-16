@@ -1,3 +1,5 @@
 *.exe
 *.o
 *.grf
+data/accounts.txt
+data/players.txt
