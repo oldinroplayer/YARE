@@ -1,47 +1,4 @@
-map2.c: In function ‘mmo_map_set00d7’:
-map2.c:1442:33: warning: pointer targets in passing argument 2 of ‘strcpy’ differ in signedness [-Wpointer-sign]
- 1442 |   strcpy(WBUFP(buf,17),temp_chat->title);  /* title */
-      |                        ~~~~~~~~~^~~~~~~
-      |                                 |
-      |                                 unsigned char *
-In file included from map2.c:11:
-/usr/include/string.h:38:36: note: expected ‘const char * restrict’ but argument is of type ‘unsigned char *’
-   38 | char    *strcpy (char *__restrict, const char *__restrict);
-      |                                    ^
 In file included from map2.c:14:
-map2.c: In function ‘mmo_map_sendwis’:
-core.h:14:66: warning: pointer targets in passing argument 2 of ‘strcmp’ differ in signedness [-Wpointer-sign]
-   14 | #define RFIFOP(fd,pos) (session[fd]->rdata+session[fd]->rdata_pos+pos)
-      |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
-      |                                                                  |
-      |                                                                  unsigned char *
-map2.c:1596:34: note: in expansion of macro ‘RFIFOP’
- 1596 |     if(strcmp(dstsd->status.name,RFIFOP(fd,4))==0){
-      |                                  ^~~~~~
-/usr/include/string.h:36:32: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
-   36 | int      strcmp (const char *, const char *);
-      |                                ^~~~~~~~~~~~
-map2.c: In function ‘mmo_map_jobchange’:
-core.h:28:67: warning: pointer targets in passing argument 2 of ‘mmo_map_sendarea’ differ in signedness [-Wpointer-sign]
-   28 | #define WFIFOP(fd,pos) (session[fd]->wdata+session[fd]->wdata_size+pos)
-      |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
-      |                                                                   |
-      |                                                                   unsigned char *
-map2.c:1764:33: note: in expansion of macro ‘WFIFOP’
- 1764 |   if(len>0) mmo_map_sendarea(fd,WFIFOP(fd,0),len,0);
-      |                                 ^~~~~~
-map2.c:394:38: note: expected ‘char *’ but argument is of type ‘unsigned char *’
-  394 | int mmo_map_sendarea(int srcfd,char *dat,int len,int wos)
-      |                                ~~~~~~^~~
-map2.c: In function ‘mmo_map_make_flooritem’:
-map2.c:1835:32: warning: pointer targets in passing argument 4 of ‘mmo_map_sendarea_mxy’ differ in signedness [-Wpointer-sign]
- 1835 |     mmo_map_sendarea_mxy(m,x,y,buf,len);
-      |                                ^~~
-      |                                |
-      |                                unsigned char *
-map2.c:433:50: note: expected ‘char *’ but argument is of type ‘unsigned char *’
-  433 | int mmo_map_sendarea_mxy(int m,int x,int y,char *dat,int len)
-      |                                            ~~~~~~^~~
 map2.c: In function ‘mmo_map_takeitem’:
 core.h:28:67: warning: pointer targets in passing argument 2 of ‘mmo_map_sendarea’ differ in signedness [-Wpointer-sign]
    28 | #define WFIFOP(fd,pos) (session[fd]->wdata+session[fd]->wdata_size+pos)
@@ -137,6 +94,7 @@ map2.c:2509:71: warning: pointer targets in passing argument 2 of ‘strncmp’ 
       |                                                                   ~~~~^~~~~~
       |                                                                       |
       |                                                                       unsigned char *
+In file included from map2.c:11:
 /usr/include/string.h:43:33: note: expected ‘const char *’ but argument is of type ‘unsigned char *’
    43 | int      strncmp (const char *, const char *, size_t);
       |                                 ^~~~~~~~~~~~
@@ -1011,15 +969,6 @@ map2.c:5175:57: note: in expansion of macro ‘RFIFOP’
 map2.c:2546:59: note: expected ‘char *’ but argument is of type ‘unsigned char *’
  2546 | int mmo_map_leavechat(int fd, struct mmo_chat* chat,char* leavecharname)
       |                                                     ~~~~~~^~~~~~~~~~~~~
-In file included from map2.c:5220:
-00a9.c:78:192: warning: pointer targets in passing argument 4 of ‘mmo_map_sendarea_mxy’ differ in signedness [-Wpointer-sign]
-   78 |                 mmo_map_sendarea_mxy(sd->mapno,map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->x,map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->y,buf,packet_len_table[0x78]);
-      |                                                                                                                                                                                                ^~~
-      |                                                                                                                                                                                                |
-      |                                                                                                                                                                                                unsigned char *
-map2.c:433:50: note: expected ‘char *’ but argument is of type ‘unsigned char *’
-  433 | int mmo_map_sendarea_mxy(int m,int x,int y,char *dat,int len)
-      |                                            ~~~~~~^~~
 core.h:28:67: warning: pointer targets in passing argument 2 of ‘mmo_map_sendall’ differ in signedness [-Wpointer-sign]
    28 | #define WFIFOP(fd,pos) (session[fd]->wdata+session[fd]->wdata_size+pos)
       |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~

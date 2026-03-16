@@ -17,22 +17,11 @@
 // Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
 
+How to compile YARE Server ?
+$ sh build-yare.sh
 
-
-
-
-
-Yor help please look at http://forum.project-yare.net
-
-
-
-
-
-
-
-
-
-
+How to run server on Wubdows ?
+Double Click runserv.bat
 
 ----------------------  [ Athena README.txt ] -------------------------------------
 

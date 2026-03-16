@@ -1,110 +1,67 @@
+//
+// PvPGN YARE MOD V1.0 (Yeat Another Ragnarok Emulator) - (Server)
+// Copyright (c) Project-YARE & PvPGN 2003
+// www.project-yare.com
+// forum.project-yare.net
+// www.pvpgn.org
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//
+// pet system preparation
+if((sd->status.inventory[RFIFOW(fd,2)-2].nameid >= 10001)&&(sd->status.inventory[RFIFOW(fd,2)-2].nameid <= 10019))
 {
-	
-	#define add_block_npc(m,n) {add_block(&map_data[m].npc[n]->block,m,map_data[m].npc[n]->x,map_data[m].npc[n]->y); \
-	map_data[m].npc[n]->block.type=BL_NPC;}
-
-
-	if((sd->status.pet.activity == 0)&&(sd->status.pet.pet_id_as_npc != -1)&&(map_data[sd->mapno].npc_num < MAX_NPC_PER_MAP))
+	if(sd->status.pet.activity == 1)
 	{
-		int npc,name_id;
-		unsigned char buf[256];
+		int equip_able = 0;
 
-		
-		--p->inventory[RFIFOW(fd,2)-2].amount;
-		// nameidはタマゴに飼える時のためにそのままにしておく
-		//if(p->inventory[RFIFOW(fd,2)-2].amount <= 0){
-		//	p->inventory[RFIFOW(fd,2)-2].nameid=0;
-		//}
-
-		name_id = sd->status.inventory[RFIFOW(fd,2)-2].nameid;
-		switch(name_id)
+		switch(sd->status.inventory[RFIFOW(fd,2)-2].nameid)
 		{
-			case 9001: npc = 1002; strcpy(sd->status.pet.pet_name,"ポリン"); break;
-			case 9002: npc = 1113; strcpy(sd->status.pet.pet_name,"ドラップス"); break;
-			case 9003: npc = 1031; strcpy(sd->status.pet.pet_name,"ポポリン"); break;
-			case 9004: npc = 1063; strcpy(sd->status.pet.pet_name,"ルナティック"); break;
-			case 9005: npc = 1049; strcpy(sd->status.pet.pet_name,"ピッキ"); break;
-			case 9006: npc = 1011; strcpy(sd->status.pet.pet_name,"チョンチョン"); break;
-			case 9007: npc = 1042; strcpy(sd->status.pet.pet_name,"スティールチョンチョン"); break;
-			case 9008: npc = 1035; strcpy(sd->status.pet.pet_name,"ハンターフライ"); break;
-			case 9009: npc = 1067; strcpy(sd->status.pet.pet_name,"カナトゥス"); break;
-			case 9010: npc = 1107; strcpy(sd->status.pet.pet_name,"子デザートウルフ"); break;
-			case 9011: npc = 1052; strcpy(sd->status.pet.pet_name,"ロッカ"); break;
-			case 9012: npc = 1014; strcpy(sd->status.pet.pet_name,"スポア"); break;
-			case 9013: npc = 1077; strcpy(sd->status.pet.pet_name,"ポイズンスポア"); break;
-			case 9014: npc = 1019; strcpy(sd->status.pet.pet_name,"ペコペコ"); break;
-			case 9015: npc = 1056; strcpy(sd->status.pet.pet_name,"スモーキー"); break;
-			case 9016: npc = 1057; strcpy(sd->status.pet.pet_name,"ヨーヨー"); break;
-			case 9017: npc = 1023; strcpy(sd->status.pet.pet_name,"オークウォリアー"); break;
-			case 9018: npc = 1026; strcpy(sd->status.pet.pet_name,"ムナック"); break;
-			case 9019: npc = 1110; strcpy(sd->status.pet.pet_name,"ドケビ"); break;
-			case 9020: npc = 1170; strcpy(sd->status.pet.pet_name,"SOFI"); break;//カタカナだとエラー
-			case 9021: npc = 1029; strcpy(sd->status.pet.pet_name,"イシス"); break;
-			case 9022: npc = 1156; strcpy(sd->status.pet.pet_name,"緑のプティット"); break;
-			case 9023: npc = 1109; strcpy(sd->status.pet.pet_name,"デビルチ"); break;
-			case 9024: npc = 1101; strcpy(sd->status.pet.pet_name,"バフォメットJr."); break;
-			default: npc = 1002; strcpy(sd->status.pet.pet_name,"ポリン"); break;
+			case 10001: if(sd->status.pet.pet_class==1101){equip_able=1;} break;
+			case 10002: if((sd->status.pet.pet_class==1011)||(sd->status.pet.pet_class==1042)){equip_able=1;} break;
+			case 10003: if(sd->status.pet.pet_class==1107){equip_able=1;} break;
+			case 10004: if(sd->status.pet.pet_class==1109){equip_able=1;} break;
+			case 10005: if(sd->status.pet.pet_class==1110){equip_able=1;} break;
+			case 10006: if(sd->status.pet.pet_class==1029){equip_able=1;} break;
+			case 10007: if(sd->status.pet.pet_class==1063){equip_able=1;} break;
+			case 10008: if(sd->status.pet.pet_class==1026){equip_able=1;} break;
+			case 10009: if(sd->status.pet.pet_class==1023){equip_able=1;} break;
+			case 10010: if(sd->status.pet.pet_class==1019){equip_able=1;} break;
+			case 10011: if(sd->status.pet.pet_class==1156){equip_able=1;} break;
+			case 10012: if(sd->status.pet.pet_class==1049){equip_able=1;} break;
+			case 10013: if((sd->status.pet.pet_class==1002)||(sd->status.pet.pet_class==1113)||(sd->status.pet.pet_class==1031)){equip_able=1;} break;
+			case 10014: if(sd->status.pet.pet_class==1052){equip_able=1;} break;
+			case 10015: if(sd->status.pet.pet_class==1067){equip_able=1;} break;
+			case 10016: if(sd->status.pet.pet_class==1170){equip_able=1;} break;
+			case 10017: if((sd->status.pet.pet_class==1014)||(sd->status.pet.pet_class==1077)){equip_able=1;} break;
+			case 10018: if(sd->status.pet.pet_class==1057){equip_able=1;} break;
+			case 10019: if(sd->status.pet.pet_class==1056){equip_able=1;} break;
+			default: equip_able = 0; break;
 		}
-		//printf("nameid=%d, case=%d\n",name_id,npc);
 
-
-		if(sd->status.pet.pet_npc_id_on_map[sd->mapno] == -1)
+		if(equip_able == 1)
 		{
-			sd->status.pet.pet_npc_id_on_map[sd->mapno] = map_data[sd->mapno].npc_num;
-			map_data[sd->mapno].npc_num++;
-			// ペットステータス初期化
-			sd->status.pet.pet_name_flag = 0;
-			sd->status.pet.pet_level = 1;
-			sd->status.pet.pet_hungry = 0;
-			sd->status.pet.pet_friendly = 0xff;
-			sd->status.pet.pet_accessory = 0;
+			WFIFOW(fd,0) = 0x1a4;
+			WFIFOB(fd,2) = 3;
+			WFIFOL(fd,3) = sd->status.pet.pet_id_as_npc;
+			WFIFOL(fd,7) = sd->status.inventory[RFIFOW(fd,2)-2].nameid;
+			WFIFOSET(fd,11);
+
+			sd->status.pet.pet_accessory = sd->status.inventory[RFIFOW(fd,2)-2].nameid;
 		}
-		sd->status.pet.activity = 1;
-		sd->status.pet.pet_class = npc;
 
-		map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]=malloc(sizeof(struct npc_data));
-		map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->m = sd->mapno;
-		map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->x = sd->x;
-		map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->y = sd->y;
-		map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->u.mons.speed = 200;
-		map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->dir = 0;
-		map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->class=sd->status.pet.pet_class;
-		map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->id=sd->status.pet.pet_id_as_npc;
-		map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->block.subtype=SCRIPT;
-		memcpy(map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->name,sd->status.pet.pet_name,24);
-		//add_block_npc(sd->mapno,map_data[sd->mapno].npc_num);
-		add_block_npc(sd->mapno,sd->status.pet.pet_npc_id_on_map[sd->mapno]);
-		mmo_map_set_npc(0,buf,map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->id,map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->class,map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->x,map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->y,0);
-		mmo_map_sendarea_mxy(sd->mapno,map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->x,map_data[sd->mapno].npc[sd->status.pet.pet_npc_id_on_map[sd->mapno]]->y,buf,packet_len_table[0x78]);
-		//map_data[sd->mapno].npc_num++;
-
-
-		//printf("CURRENT PET ID=%d MAP=%d\n",sd->status.pet.pet_npc_id_on_map[sd->mapno],sd->mapno);
-
-
-		WFIFOW(fd,0) = 0x1a4;
-		WFIFOB(fd,2) = 0;
-		WFIFOL(fd,3) = sd->status.pet.pet_id_as_npc;
-		WFIFOL(fd,7) = 0;
-		WFIFOSET(fd,11);
-		
-		
-		WFIFOW(fd,0) = 0x1a4;
-		WFIFOB(fd,2) = 5;
-		WFIFOL(fd,3) = sd->status.pet.pet_id_as_npc;
-		WFIFOL(fd,7) = 14;
-		WFIFOSET(fd,11);
-		
-		
-		WFIFOW(fd,0) = 0x1a2;
-		memcpy(WFIFOP(fd,2),sd->status.pet.pet_name,24);
-		WFIFOB(fd,26) = sd->status.pet.pet_name_flag;
-		WFIFOW(fd,27) = sd->status.pet.pet_level;
-		WFIFOW(fd,29) = sd->status.pet.pet_hungry;;
-		WFIFOW(fd,31) = sd->status.pet.pet_friendly;
-		WFIFOW(fd,33) = sd->status.pet.pet_accessory;
-		WFIFOSET(fd,35);
-
+		break;
 	}
-
 }
+

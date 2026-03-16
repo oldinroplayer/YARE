@@ -1,7 +1,7 @@
 //warp point
 
 alberta.gat,15,234,0	warp	w1	2,5,pay_fild03.gat,388,63
-pay_fild03.gat,392,63,0	warp	w2	2,7,alberta.gat,19,233
+// pay_fild03.gat,392,63,0	warp	w2	2,7,alberta.gat,19,233
 alberta_in.gat,78,44,0	warp	w3	2,5,alberta.gat,37,41
 alberta.gat,33,42,0	warp	w4	2,2,alberta_in.gat,74,44
 alberta_in.gat,64,57,0	warp	w5	3,2,alberta_in.gat,24,58

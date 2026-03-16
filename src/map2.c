@@ -1439,7 +1439,7 @@ int mmo_map_set00d7(int fd,unsigned char *buf)
   WBUFW(buf,12) = temp_chat->limit;  /* limit */
   WBUFW(buf,14) = temp_chat->users;  /* users */
   WBUFB(buf,16) = temp_chat->pub;  /* pub */
-  strcpy(WBUFP(buf,17),temp_chat->title);  /* title */
+  strcpy((char *)WBUFP(buf,17),(char *)temp_chat->title);  /* title */
   return WBUFW(buf,2);
 }
 
@@ -1593,7 +1593,7 @@ int mmo_map_sendwis(int fd)
   for(i=0;i<FD_SETSIZE;i++){
     if(!session[i] || fd==i || !(dstsd=session[i]->session_data))
       continue;
-    if(strcmp(dstsd->status.name,RFIFOP(fd,4))==0){
+    if(strcmp((char *)dstsd->status.name, (char *)RFIFOP(fd,4)) == 0){
       WFIFOW(i,0)=0x97;
       WFIFOW(i,2)=RFIFOW(fd,2);
       memcpy(WFIFOP(i,4),srcsd->status.name,24);
@@ -1761,7 +1761,7 @@ int mmo_map_jobchange(int fd,int class)
   sd->status.class=class;
   //見た目を変えている 引数3～　sd->account_id(かえるID)LOOK_BASE（本体）,sd->status.class(種類)
   len=mmo_map_set_look(fd,WFIFOP(fd,0),sd->account_id,LOOK_BASE,sd->status.class);
-  if(len>0) mmo_map_sendarea(fd,WFIFOP(fd,0),len,0);
+  if(len>0) mmo_map_sendarea(fd, (char *)WFIFOP(fd,0), len,0);
   mmo_map_calc_status(fd,0,0);
   len = mmo_map_all_skill(fd,WFIFOP(fd,0),sd->status.skill_point,0);
 	 if(len>0) WFIFOSET(fd,len);
@@ -1832,7 +1832,7 @@ int mmo_map_make_flooritem(struct item *item_data,int amount,int m,int x,int y)
 
   len=mmo_map_set_dropitem(0,buf,fitem);
   if(len>0)
-    mmo_map_sendarea_mxy(m,x,y,buf,len);
+    mmo_map_sendarea_mxy(m, x, y, (char *)buf, len);
 
   return id;
 }
@@ -1855,7 +1855,7 @@ int mmo_map_dropitem(int fd,int index,int amount)
   return 0;
 }
 
-int mmo_map_takeitem(int fd,int item_id)
+int mmo_map_takeitem(int fd, int item_id)
 {
   int len;
   struct map_session_data *sd;
@@ -5211,7 +5211,7 @@ idou:
       mmo_map_dropitem(fd,RFIFOW(fd,2),RFIFOW(fd,4));
       break;
     case 0x9f: // take item
-      mmo_map_takeitem(fd,RFIFOL(fd,2));
+      mmo_map_takeitem(fd, RFIFOL(fd,2));
       break;
       //アイテム装備 S 00a9 <index>.w <equip type>.w
     case 0xa9:
