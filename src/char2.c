@@ -344,10 +344,10 @@ int make_new_char(int fd,unsigned char *dat)
   char_dat[i].head_top=0;
   char_dat[i].head_mid=0;
   char_dat[i].head_bottom=0;
-  strcpy(char_dat[i].last_point.map,"new_5-1.gat");
+  strcpy(char_dat[i].last_point.map,"new_1-1.gat");
   char_dat[i].last_point.x=53;
   char_dat[i].last_point.y=111;
-  strcpy(char_dat[i].save_point.map,"new_5-1.gat");
+  strcpy(char_dat[i].save_point.map,"new_1-1.gat");
   char_dat[i].save_point.x=53;
   char_dat[i].save_point.y=111;
   char_num++;

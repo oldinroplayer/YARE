@@ -52,3 +52,231 @@ server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
 auth ok 2026-03-16 08:27:29.569 admin admin 0
 server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
 auth ok 2026-03-16 08:39:23.895 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 08:50:57.679 admin admin 0
+client connection request Lemming from 127.0.0.1
+auth ok 2026-03-16 08:51:29.856 Lemming bastard 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 08:53:16.779 admin admin 0
+client connection request Lemming from 127.0.0.1
+auth ok 2026-03-16 08:53:46.872 Lemming bastard 0
+client connection request Lemming from 127.0.0.1
+auth ok 2026-03-16 08:54:55.022 Lemming bastard 0
+client connection request Lemming from 127.0.0.1
+auth ok 2026-03-16 08:58:31.147 Lemming bastard 0
+client connection request test from 127.0.0.1
+auth ok 2026-03-16 09:05:12.172 test test 0
+client connection request Lemming from 127.0.0.1
+auth ok 2026-03-16 09:08:46.030 Lemming bastard 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:11:39.461 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:12:37.276 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 09:13:04.879 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:20:10.857 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:20:24.267 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:20:38.798 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:26:49.399 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 09:27:40.203 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 09:29:12.668 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 09:31:07.965 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 09:31:41.107 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 09:34:01.903 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:36:02.662 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:36:58.941 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 09:37:53.640 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:38:24.065 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:40:10.181 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:41:36.117 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:42:26.871 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:43:31.108 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:44:14.621 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:45:31.210 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:46:24.176 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:47:01.768 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 09:56:08.395 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 09:56:34.809 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 10:03:22.952 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 10:05:18.906 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 10:07:18.251 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 10:12:04.027 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 10:12:20.548 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 10:16:37.576 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 10:17:00.459 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 10:19:24.741 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 10:19:46.672 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 10:26:06.098 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 12:13:33.526 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 12:14:07.357 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 12:20:54.750 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 12:21:22.791 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 12:21:50.089 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 12:22:38.655 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 12:23:16.488 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 12:23:53.920 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 12:24:21.569 gm02 gm02 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 12:25:09.885 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 12:26:32.059 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 12:27:23.280 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 12:33:19.462 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 12:34:07.604 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 12:44:49.594 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 12:51:07.793 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 12:51:53.698 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 14:31:58.179 admin admin 0
+client connection request gm01 from 127.0.0.1
+auth ok 2026-03-16 14:33:20.002 gm01 gm01 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 15:02:14.273 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 15:04:20.413 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 15:06:32.503 admin admin 0
+client connection request gm02 from 127.0.0.1
+auth ok 2026-03-16 15:06:55.876 gm02 gm02 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 15:14:50.007 admin admin 0
+client connection request gm01 from 127.0.0.1
+auth ok 2026-03-16 15:15:58.998 gm01 gm01 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 15:17:22.071 admin admin 0
+client connection request gm01 from 127.0.0.1
+auth ok 2026-03-16 15:17:43.513 gm01 gm01 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 15:19:14.913 admin admin 0
+client connection request gm01 from 127.0.0.1
+auth ok 2026-03-16 15:19:31.610 gm01 gm01 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 15:26:24.650 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 15:28:50.274 admin admin 0
+client connection request gm01 from 127.0.0.1
+auth ok 2026-03-16 15:29:11.182 gm01 gm01 0
+client connection request gm03_M from 127.0.0.1
+auth new 2026-03-16 15:30:50.280 gm03 gm03 1
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 15:44:14.850 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 15:50:31.669 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 15:52:57.262 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 15:54:34.937 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 16:01:00.117 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:04:28.350 admin admin 0
+client connection request gm01 from 127.0.0.1
+auth ok 2026-03-16 18:06:26.741 gm01 gm01 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:19:29.551 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:20:16.970 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:21:08.314 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:22:11.149 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:22:52.316 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:26:12.706 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:27:25.940 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:32:53.637 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:37:15.763 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:40:01.746 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:42:21.244 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:45:28.664 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:49:00.526 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:51:10.927 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:51:34.316 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:54:58.201 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 18:56:37.788 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 20:40:37.807 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 20:45:42.482 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 20:49:10.834 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 20:52:32.319 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 20:54:11.478 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 20:56:13.975 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 20:57:42.803 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 20:58:58.618 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 20:59:34.686 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 21:00:03.840 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 21:01:31.933 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 21:02:47.221 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 21:04:54.950 admin admin 0

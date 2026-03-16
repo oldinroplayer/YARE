@@ -1,2 +1,2 @@
-data:L:\RO\RO_SET\2003_YARE\CLIENT\RagnarokOnline\data.grf
-// sdata:sdata.grf
+data:data.grf
+sdata:sdata.grf
