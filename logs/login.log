@@ -362,3 +362,13 @@ server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
 auth ok 2026-03-16 23:15:45.256 admin admin 0
 server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
 auth ok 2026-03-16 23:18:20.596 admin admin 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-16 23:59:28.877 admin admin 0
+client connection request gm03 from 127.0.0.1
+auth ok 2026-03-17 00:00:48.113 gm03 gm03 0
+server connection request Yare @ 127.0.0.1:6121 (127.0.0.1)
+auth ok 2026-03-17 00:03:00.466 admin admin 0
+client connection request gm03 from 127.0.0.1
+auth ok 2026-03-17 00:03:27.443 gm03 gm03 0
+client connection request gm04 from 127.0.0.1
+auth ok 2026-03-17 00:04:07.458 gm04 gm04 0
