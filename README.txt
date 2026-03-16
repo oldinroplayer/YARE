@@ -19,13 +19,22 @@
 //
 
 Support
-- Client 2003
+- RO Client 2003
+- Cygwin64
 
 Tool for compile server
 - cygwin
 
+Tools that need to be installed in Cygwin.
+- gcc-core
+- make
+- zlib-devel
+
 How to compile YARE Server ?
 $ sh build-yare.sh
+
+Set environment to runserver.
+copy file data.grf and sdata.grf in game to YARE folder
 
 How to run server on Wubdows ?
 Double Click runserv.bat

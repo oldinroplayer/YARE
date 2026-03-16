@@ -18,7 +18,7 @@ pay_fild09.gat,0,0,0	monster	BIGFOOT	1060,15
 pay_fild09.gat,0,0,0	monster	ELDER WILOW	1033,5
 pay_fild09.gat,0,0,0	monster	EGGYRA	1116,5
 pay_fild09.gat,0,0,0	monster	SOHEE	1170,8
-pay_fild09.gat,0,0,0	monster	WANDER MAN	1208,1
+// pay_fild09.gat,0,0,0	monster	WANDER MAN	1208,1
 pay_fild10.gat,0,0,0	monster	POISON SPORE	1077,5
 pay_fild10.gat,0,0,0	monster	BIGFOOT	1060,10
 pay_fild10.gat,0,0,0	monster	EGGYRA	1116,5
@@ -160,21 +160,21 @@ gef_dun03.gat,0,0,0	monster	JOKER	1131,5
 glast_01.gat,0,0,0	monster	POISON SPORE	1077,10
 glast_01.gat,0,0,0	monster	JAKK	1130,5
 glast_01.gat,0,0,0	monster	BATHORY	1102,5
-glast_01.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
+// glast_01.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
 glast_01.gat,0,0,0	monster	MYST	1151,15
 gef_fild08.gat,0,0,0	monster	POPORING	1031,15
 gef_fild08.gat,0,0,0	monster	STAINER	1174,10
 gef_fild08.gat,0,0,0	monster	CREAMY	1018,5
-gef_fild08.gat,0,0,0	monster	KOBOLD 4	1136,5
-gef_fild08.gat,0,0,0	monster	KOBOLD 5	1137,5
-gef_fild08.gat,0,0,0	monster	KOBOLD 2	1134,5
-gef_fild08.gat,0,0,0	monster	KOBOLD 3	1135,5
-gef_fild08.gat,0,0,0	monster	KOBOLD 1	1133,5
+// gef_fild08.gat,0,0,0	monster	KOBOLD 4	1136,5
+// gef_fild08.gat,0,0,0	monster	KOBOLD 5	1137,5
+// gef_fild08.gat,0,0,0	monster	KOBOLD 2	1134,5
+// gef_fild08.gat,0,0,0	monster	KOBOLD 3	1135,5
+// gef_fild08.gat,0,0,0	monster	KOBOLD 1	1133,5
 gef_fild06.gat,0,0,0	monster	POPORING	1031,15
 gef_fild06.gat,0,0,0	monster	STAINER	1174,5
 gef_fild06.gat,0,0,0	monster	CREAMY	1018,5
-gef_fild06.gat,0,0,0	monster	PETIT	1155,5
-gef_fild06.gat,0,0,0	monster	PETIT_	1156,5
+// gef_fild06.gat,0,0,0	monster	PETIT	1155,5
+// gef_fild06.gat,0,0,0	monster	PETIT_	1156,5
 moc_fild07.gat,0,0,0	monster	PECOPECO EGG	1047,10
 moc_fild07.gat,0,0,0	monster	DROPS	1113,5
 moc_fild07.gat,0,0,0	monster	CHONCHON	1011,10
@@ -186,7 +186,7 @@ moc_fild06.gat,0,0,0	monster	PECOPECO EGG	1047,10
 moc_fild06.gat,0,0,0	monster	PICKY	1049,10
 moc_fild06.gat,0,0,0	monster	PICKY	1050,10
 moc_fild06.gat,0,0,0	monster	CONDOR	1009,10
-moc_fild06.gat,0,0,0	monster	DESERT WOLF B	1107,10
+// moc_fild06.gat,0,0,0	monster	DESERT WOLF B	1107,10
 moc_fild06.gat,0,0,0	monster	MUKA	1055,10
 moc_fild06.gat,0,0,0	monster	DRAGON FLY	1091,1
 moc_fild05.gat,0,0,0	monster	DROPS	1113,5
@@ -218,7 +218,7 @@ moc_fild12.gat,0,0,0	monster	PICKY	1049,10
 moc_fild12.gat,0,0,0	monster	PICKY	1050,10
 moc_fild18.gat,0,0,0	monster	DROPS	1113,5
 moc_fild18.gat,0,0,0	monster	CHONCHON	1011,15
-moc_fild18.gat,0,0,0	monster	ANACONDAQ	1030,10
+// moc_fild18.gat,0,0,0	monster	ANACONDAQ	1030,10
 moc_fild18.gat,0,0,0	monster	HODE	1127,10
 moc_fild18.gat,0,0,0	monster	STEEL CHONCHON	1042,10
 moc_fild17.gat,0,0,0	monster	ANDRE	1095,10
@@ -245,7 +245,7 @@ moc_fild09.gat,0,0,0	monster	PECOPECO EGG	1047,10
 moc_fild09.gat,0,0,0	monster	PICKY	1049,5
 moc_fild09.gat,0,0,0	monster	PICKY	1050,5
 moc_fild09.gat,0,0,0	monster	CONDOR	1009,15
-moc_fild09.gat,0,0,0	monster	DESERT WOLF B	1107,10
+// moc_fild09.gat,0,0,0	monster	DESERT WOLF B	1107,10
 moc_fild09.gat,0,0,0	monster	MUKA	1055,10
 moc_fild15.gat,0,0,0	monster	ANT EGG	1097,5
 moc_fild15.gat,0,0,0	monster	ANDRE	1095,10
@@ -259,8 +259,8 @@ moc_fild16.gat,0,0,0	monster	SAND MAN	1165,5
 moc_fild08.gat,0,0,0	monster	METALLER	1058,10
 moc_fild08.gat,0,0,0	monster	GOLEM	1040,5
 moc_fild08.gat,0,0,0	monster	SCORPION	1001,5
-moc_fild08.gat,0,0,0	monster	DESERT WOLF B	1107,15
-moc_fild14.gat,0,0,0	monster	DESERT WOLF B	1107,10
+// moc_fild08.gat,0,0,0	monster	DESERT WOLF B	1107,15
+// moc_fild14.gat,0,0,0	monster	DESERT WOLF B	1107,10
 moc_fild14.gat,0,0,0	monster	SCORPION	1001,10
 moc_fild14.gat,0,0,0	monster	METALLER	1058,5
 moc_fild14.gat,0,0,0	monster	DESERT WOLF	1106,48
@@ -333,10 +333,10 @@ mjolnir_12.gat,0,0,0	monster	METALLER	1058,5
 mjolnir_12.gat,0,0,0	monster	AMBERNITE	1094,10
 mjolnir_12.gat,0,0,0	monster	POPORING	1031,15
 mjolnir_12.gat,0,0,0	monster	MANTIS	1139,10
-mjolnir_12.gat,0,0,0	monster	PETIT	1155,3
+// mjolnir_12.gat,0,0,0	monster	PETIT	1155,3
 mjolnir_12.gat,0,0,0	monster	RAFFLESIA	1162,10
 in_sphinx1.gat,0,0,0	monster	DRAINLIAR	1111,5
-in_sphinx1.gat,0,0,0	monster	ANACONDAQ	1030,10
+// in_sphinx1.gat,0,0,0	monster	ANACONDAQ	1030,10
 in_sphinx1.gat,0,0,0	monster	ZEROM	1178,5
 in_sphinx1.gat,0,0,0	monster	MATYR	1146,15
 in_sphinx1.gat,0,0,0	monster	REQUIEM	1164,5
@@ -797,7 +797,7 @@ prt_fild09.gat,0,0,0	monster	PICKY	1050,5
 prt_fild09.gat,0,0,0	monster	CHONCHON	1011,10
 prt_fild09.gat,0,0,0	monster	STEEL CHONCHON	1042,5
 prt_fild09.gat,0,0,0	monster	CONDOR	1009,10
-prt_fild09.gat,0,0,0	monster	DESERT WOLF B	1107,5
+// prt_fild09.gat,0,0,0	monster	DESERT WOLF B	1107,5
 prt_fild09.gat,0,0,0	monster	MUKA	1055,5
 prt_fild10.gat,0,0,0	monster	LUNATIC	1063,10
 prt_fild10.gat,0,0,0	monster	SAVAGE BABE	1167,10
@@ -821,7 +821,7 @@ gef_fild05.gat,0,0,0	monster	CHONCHON	1011,5
 gef_fild05.gat,0,0,0	monster	RODA FROG	1012,10
 gef_fild05.gat,0,0,0	monster	SAVAGE BABE	1167,10
 gef_fild05.gat,0,0,0	monster	ROCKER	1052,5
-gef_fild05.gat,0,0,0	monster	DESERT WOLF B	1107,5
+// gef_fild05.gat,0,0,0	monster	DESERT WOLF B	1107,5
 gef_fild04.gat,0,0,0	monster	PORING	1002,10
 gef_fild04.gat,0,0,0	monster	FABRE	1007,10
 gef_fild04.gat,0,0,0	monster	PUPA	1008,5
@@ -871,7 +871,7 @@ moc_pryd04.gat,0,0,0	monster	ISIS	1029,10
 moc_pryd04.gat,0,0,0	monster	MIMIC	1191,3
 moc_pryd04.gat,0,0,0	monster	OSIRIS	1038,1
 moc_pryd05.gat,0,0,0	monster	SCORPION	1001,10
-moc_pryd05.gat,0,0,0	monster	ANACONDAQ	1030,5
+// moc_pryd05.gat,0,0,0	monster	ANACONDAQ	1030,5
 moc_pryd05.gat,0,0,0	monster	MUMMY	1041,10
 moc_pryd05.gat,0,0,0	monster	VERIT	1032,10
 moc_pryd05.gat,0,0,0	monster	GHOUL	1036,5
@@ -1658,7 +1658,7 @@ c_tower4.gat,0,0,0	monster	MIMIC	1191,1
 c_tower4.gat,0,0,0	monster	MIMIC	1191,1
 c_tower4.gat,0,0,0	monster	MIMIC	1191,1
 c_tower4.gat,0,0,0	monster	MIMIC	1191,1
-c_tower4.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
+// c_tower4.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
 c_tower4.gat,0,0,0	monster	EXECUTIONER	1205,1
 gl_church.gat,0,0,0	monster	NIGHTMARE	1061,5
 gl_church.gat,0,0,0	monster	WHISPER	1179,5
@@ -1731,7 +1731,7 @@ gl_knt01.gat,0,0,0	monster	EVIL DRUID	1117,1
 gl_knt02.gat,0,0,0	monster	RAYDRIC	1163,5
 gl_knt02.gat,0,0,0	monster	WHISPER	1179,5
 gl_knt02.gat,0,0,0	monster	JOKER	1131,10
-gl_knt02.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
+// gl_knt02.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
 gl_knt02.gat,0,0,0	monster	KHALITZBURG	1132,1
 gl_knt02.gat,0,0,0	monster	KHALITZBURG	1132,1
 gl_knt02.gat,0,0,0	monster	KHALITZBURG	1132,1
@@ -1748,8 +1748,8 @@ gl_cas01.gat,0,0,0	monster	RIDEWORD	1195,5
 gl_cas01.gat,0,0,0	monster	TIRFING	1204,1
 gl_in01.gat,0,0,0	monster	MARIONETTE	1143,10
 gl_in01.gat,0,0,0	monster	RIDEWORD	1195,5
-gl_in01.gat,0,0,0	monster	WANDER MAN	1208,1
-gl_cas02.gat,0,0,0	monster	WANDER MAN	1208,5
+// gl_in01.gat,0,0,0	monster	WANDER MAN	1208,1
+// gl_cas02.gat,0,0,0	monster	WANDER MAN	1208,5
 gl_cas02.gat,0,0,0	monster	RAYDRIC	1163,10
 gl_cas02.gat,0,0,0	monster	NIGHTMARE	1061,10
 gl_cas02.gat,0,0,0	monster	WHISPER	1179,10
@@ -1760,8 +1760,8 @@ gl_cas02.gat,0,0,0	monster	WHISPER 	1185,1
 gl_cas02.gat,0,0,0	monster	BAPHOMET	1039,1
 gl_cas02.gat,0,0,0	monster	RIDEWORD	1195,4
 gl_cas02.gat,0,0,0	monster	DEVIRUCHI	1109,4
-gl_cas02.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
-gl_cas02.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
+// gl_cas02.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
+// gl_cas02.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
 gl_cas02.gat,0,0,0	monster	RIDEWORD	1195,15
 gl_cas02.gat,0,0,0	monster	MARIONETTE	1143,8
 gl_cas02.gat,0,0,0	monster	KHALITZBURG	1132,1
@@ -1769,8 +1769,8 @@ gl_cas02.gat,0,0,0	monster	KHALITZBURG	1132,1
 gl_cas02.gat,0,0,0	monster	KHALITZBURG	1132,1
 gl_cas02.gat,0,0,0	monster	KHALITZBURG	1132,1
 gl_cas02.gat,0,0,0	monster	KHALITZBURG	1132,1
-gl_cas02.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
-gl_cas02.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
+// gl_cas02.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
+// gl_cas02.gat,0,0,0	monster	KNIGHT OF ABYSS	1219,1
 gl_cas02.gat,0,0,0	monster	MIMIC	1191,1
 gl_cas02.gat,0,0,0	monster	MIMIC	1191,1
 gl_cas02.gat,0,0,0	monster	MYSTELTAINN	1203,1

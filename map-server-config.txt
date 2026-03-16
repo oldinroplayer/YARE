@@ -5,11 +5,11 @@ char_port: 6121
 map_ip: 127.0.0.1
 map_port: 5121
 
-// -- NPC --
+// -- NPC script --
 npc: config/npc_warp.txt
 npc: config/npc_npcs.txt
-// npc: config/npc_shop.txt
-// npc: config/npc_monster.txt
+npc: config/npc_shop.txt
+npc: config/npc_monster.txt
 
 // -- Map --
 // Trainning Ground
@@ -234,6 +234,24 @@ map: xmas.gat
 map: xmas_fild01.gat
 map: xmas_in.gat
 
+// Comodo Town
+map: comodo.gat
+map: cmd_in01.gat
+map: cmd_in02.gat
+map: cmd_fild01.gat
+map: cmd_fild02.gat
+map: cmd_fild03.gat
+map: cmd_fild04.gat
+map: cmd_fild05.gat
+map: cmd_fild06.gat
+map: cmd_fild07.gat
+map: cmd_fild08.gat
+map: cmd_fild09.gat
+// Kokomo Beach Dungeon
+map: beach_dun.gat
+map: beach_dun2.gat
+map: beach_dun3.gat
+
 // PVP Map
 map: pvp_y_1-1.gat // prontera.gat
 map: pvp_y_2-1.gat // prontera.gat
@@ -374,26 +392,11 @@ map: treasure02.gat
 // map: guild_vs2.gat // job_priest.gat (not support)
 // map: guild_vs3.gat // job_knight.gat (not support)
 
-//Known Missing Maps From iRO 
-// map: ordeal_1-3.gat // ordeal_a03.gat
-// map: ordeal_2-3.gat // ordeal_a03.gat
-// map: ordeal_3-3.gat // ordeal_a03.gat
-// map: ordeal_1-4.gat // ordeal_a04.gat
-// map: ordeal_2-4.gat // ordeal_a04.gat
-// map: ordeal_3-4.gat // ordeal_a04.gat
-// map: guild_room.gat // quiz_01.gat
-// map: cmd_fild01.gat
-// map: cmd_fild02.gat
-// map: cmd_fild03.gat
-// map: cmd_fild04.gat
-// map: cmd_fild05.gat
-// map: cmd_fild06.gat
-// map: cmd_fild07.gat
-// map: cmd_fild08.gat
-// map: cmd_fild09.gat
-// map: beach_dun.gat
-// map: beach_dun2.gat
-// map: beach_dun3.gat
-// map: comodo.gat
-// map: cmd_in01.gat
-// map: cmd_in02.gat
+// Known Missing Maps From iRO 
+// map: ordeal_1-3.gat // ordeal_a03.gat (not support)
+// map: ordeal_2-3.gat // ordeal_a03.gat (not support)
+// map: ordeal_3-3.gat // ordeal_a03.gat (not support)
+// map: ordeal_1-4.gat // ordeal_a04.gat (not support)
+// map: ordeal_2-4.gat // ordeal_a04.gat (not support)
+// map: ordeal_3-4.gat // ordeal_a04.gat (not support)
+// map: guild_room.gat // quiz_01.gat (not support)

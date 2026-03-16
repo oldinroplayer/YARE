@@ -112,6 +112,3 @@ close;
 Lcancel:
 mes "ไม่เป็นไร ค่อยๆตัดสินใจก็ได้";	close;
 close; }
-
-
-
