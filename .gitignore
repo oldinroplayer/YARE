@@ -3,8 +3,5 @@
 *.grf
 data/accounts.txt
 data/players.txt
-logs/char.log
-logs/login.log
-logs/map.log
-logs/mes.log
 src/error_log.txt
+/logs
