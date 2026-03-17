@@ -10,6 +10,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <arpa/inet.h>
+#include <stdint.h>
 
 #include "core.h"
 #include "mmo.h"
@@ -357,7 +358,7 @@ int parse_tochar(int fd)
   return 0;
 }
 
-int mmo_map_sendblock(int m,int bx,int by,char *dat,int len,int srcfd,int wos)
+int mmo_map_sendblock(int m, int bx, int by, unsigned char *dat, int len, int srcfd, int wos)
 {
   struct block_list *bl;
   struct map_session_data *srcsd,*dstsd;
@@ -391,7 +392,7 @@ int mmo_map_sendblock(int m,int bx,int by,char *dat,int len,int srcfd,int wos)
 
 // wos = without self  0 - include srcfd  1- exclude srcfd
 // 2- exclude all in chat users 3- exclude same chat joined user
-int mmo_map_sendarea(int srcfd,char *dat,int len,int wos)
+int mmo_map_sendarea(int srcfd, unsigned char *dat, int len, int wos)
 {
   struct map_session_data *srcsd;
   int bx,by,i,j;
@@ -409,7 +410,7 @@ int mmo_map_sendarea(int srcfd,char *dat,int len,int wos)
   return 0;
 }
 
-int mmo_map_sendchat(int srcfd,char *dat,int len,int wos)
+int mmo_map_sendchat(int srcfd, unsigned char *dat, int len, int wos)
 {
   struct map_session_data *srcsd,*dstsd;
   struct mmo_chat* chat;
@@ -430,7 +431,7 @@ int mmo_map_sendchat(int srcfd,char *dat,int len,int wos)
   return 0;
 }
 
-int mmo_map_sendarea_mxy(int m,int x,int y,char *dat,int len)
+int mmo_map_sendarea_mxy(int m, int x, int y, unsigned char *dat, int len)
 {
   int bx,by,i,j;
 
@@ -446,7 +447,7 @@ int mmo_map_sendarea_mxy(int m,int x,int y,char *dat,int len)
   return 0;
 }
 
-int mmo_map_sendall(int srcfd,char *dat,int len,int wos)
+int mmo_map_sendall(int srcfd, unsigned char *dat, int len, int wos)
 {
   struct map_session_data *srcsd,*dstsd;
   int fd;
@@ -1761,7 +1762,7 @@ int mmo_map_jobchange(int fd,int class)
   sd->status.class=class;
   //見た目を変えている 引数3～　sd->account_id(かえるID)LOOK_BASE（本体）,sd->status.class(種類)
   len=mmo_map_set_look(fd,WFIFOP(fd,0),sd->account_id,LOOK_BASE,sd->status.class);
-  if(len>0) mmo_map_sendarea(fd, (char *)WFIFOP(fd,0), len,0);
+  if(len>0) mmo_map_sendarea(fd, WFIFOP(fd,0), len,0);
   mmo_map_calc_status(fd,0,0);
   len = mmo_map_all_skill(fd,WFIFOP(fd,0),sd->status.skill_point,0);
 	 if(len>0) WFIFOSET(fd,len);
@@ -1832,7 +1833,7 @@ int mmo_map_make_flooritem(struct item *item_data,int amount,int m,int x,int y)
 
   len=mmo_map_set_dropitem(0,buf,fitem);
   if(len>0)
-    mmo_map_sendarea_mxy(m, x, y, (char *)buf, len);
+    mmo_map_sendarea_mxy(m, x, y, buf, len);
 
   return id;
 }
@@ -1876,7 +1877,7 @@ int mmo_map_takeitem(int fd, int item_id)
     WFIFOL(fd,6)=item_id;
     WFIFOL(fd,10)=gettick();
     WFIFOB(fd,26)=1;
-    mmo_map_sendarea(fd,WFIFOP(fd,0),packet_len_table[0x8a],0);
+    mmo_map_sendarea(fd, WFIFOP(fd,0), packet_len_table[0x8a], 0);
 
     WFIFOW(fd,0)=0xa1;	// delete floor item
     WFIFOL(fd,2)=item_id;
@@ -2188,7 +2189,7 @@ int walk_char(int tid,unsigned int tick,int id,int data)
   static int dirx[8]={0,-1,-1,-1,0,1,1,1};
   static int diry[8]={1,1,0,-1,-1,-1,0,1};
   // ADDED on 04/09/2003 ------------------
-  char buf[256];
+  unsigned char buf[256];
   // --------------------------------------
 
   //printf("walk_char %d %08x %d\n",id,tick,data);
@@ -2506,7 +2507,7 @@ int mmo_map_addchat( int fd,struct mmo_chat* chat,char *pass)
   if(session[fd]==NULL || (sd = session[fd]->session_data)== NULL || chat==NULL)
     return 0;
 
-  if(chat->limit == chat ->users || (chat->pub==0 && strncmp(pass,chat->pass,8))){
+  if(chat->limit == chat ->users || (chat->pub==0 && strncmp(pass, (const char*)chat->pass, 8))){
     // 人数が一杯かパスワードが違った。本人にエラー報告しておわり
     WFIFOW(fd,0)=0xda;
     WFIFOB(fd,2)=1;
@@ -2679,7 +2680,7 @@ int mmo_map_delay_item_drop(int tid,unsigned int tick,int id,int data)
   struct delay_item_drop *ditem;
   struct item temp_item;
 
-  ditem=(struct delay_item_drop *)id;
+  ditem=(struct delay_item_drop *)(intptr_t)id;
   //printf("drop %d -> %d %d %d %d %d\n",tid,ditem->nameid,ditem->amount,ditem->m,ditem->x,ditem->y);
 
   memset(&temp_item,0,sizeof(temp_item));
@@ -2756,7 +2757,7 @@ int mmo_map_item_drop(int m,int n)
 	      ditem->m=m;
 		  ditem->x=map_data[m].npc[n]->x;
 		  ditem->y=map_data[m].npc[n]->y;
-		  add_timer(gettick()+500+i,mmo_map_delay_item_drop,(int)ditem,0);
+		  add_timer(gettick()+500+i, mmo_map_delay_item_drop, (intptr_t)ditem, 0);
 					}
 				 }
 		return 0;
@@ -2848,19 +2849,22 @@ int mmo_map_pvp_skill_attack(int fd,int target_id,int skill_num,unsigned long ti
 		switch(skill_num){
 		//ヒール
 			case 28:
-			printf("targetID:%d\nheal_point:%d\naccount_id:%d\n",target_id,heal_point,sd->account_id);
+			printf("targetID:%d\nheal_point:%d\naccount_id:%d\n", target_id, heal_point, sd->account_id);
 				target_sd->status.hp += heal_point;
-				if(target_sd->status.hp > target_sd->status.max_hp)
-					target_sd->status.hp=target_sd->status.max_hp;
+				if(target_sd->status.hp > target_sd->status.max_hp) {
+					target_sd->status.hp = target_sd->status.max_hp;
+				}
 					WFIFOW(target_fd,0) = 0xb0;
-					WFIFOW(target_fd,2) = 0005;
+					WFIFOW(target_fd,2) = 5;
 					WFIFOL(target_fd,4) = target_sd->status.hp;
 					WFIFOSET(target_fd,8);
 				break;
 		//リザレクション
 			case 54:
 					target_sd->status.hp++;
-					if(target_sd->status.hp > target_sd->status.max_hp)target_sd->status.hp=target_sd->status.max_hp;
+					if(target_sd->status.hp > target_sd->status.max_hp) {
+						target_sd->status.hp=target_sd->status.max_hp;
+					}
 					WFIFOW(target_fd,0) = 0xb0;
 					WFIFOW(target_fd,2) = 0005;
 					WFIFOL(target_fd,4) = target_sd->status.hp;
@@ -2993,6 +2997,8 @@ if(session[fd] != 0) { // edit Lemming
 				break;
 			}
 	}
+	// now don't use but use in future
+	(void)target_fd;
 
 //	if(map_data[m].npc[n]->u.mons.hp<=0)
 		//  map_data[m].npc[n]->u.mons.hp = mons_data[map_data[m].npc[n]->class].max_hp;
@@ -3189,6 +3195,8 @@ if(session[fd] != 0) { // edit Lemming
 		{
 		printf("PLACE SKILL 2 ! = %d\n",skill_db[skill_num].type_pl);
 		skill_type = search_placeskill(skill_num);
+		// now don't use but use in future
+		(void)skill_type;
 	//スキル詠唱
 	//R 013e <src ID>.l <dst ID>.l <X>.w <Y>.w <lv?>.w ?.w <wait>.l
 		WFIFOW(fd,0) = 0x13e;
@@ -4787,7 +4795,7 @@ int parse_map(int fd)
 			pet_init(sd);
 			if(sd->status.pet.activity == 1)
 			{
-				char buf[256];
+				unsigned char buf[256];
 				#define add_block_npc(m,n) {add_block(&map_data[m].npc[n]->block,m,map_data[m].npc[n]->x,map_data[m].npc[n]->y); \
 				map_data[m].npc[n]->block.type=BL_NPC;}
 

@@ -329,10 +329,10 @@ struct mmo_chat
   unsigned short  users;      /* ? */
   unsigned char pub;      /* room attribute */
   unsigned char title[62];    /* room title MAX 60 */
-  unsigned char pass[8];    /* password */
+  char pass[8];    /* password */
   int usersfd[20];
   unsigned long usersID[20];  /* join users ID */
-  unsigned char usersName[20][24]; /* join users Name */
+  char usersName[20][24]; /* join users Name */
   struct mmo_chat* next;
   struct mmo_chat* prev;
 };

@@ -23,7 +23,7 @@ int is_item(int object){
 }
 /**********************************************************************************************/
       	char *message;
-      	message = strchr(RFIFOP(fd,4)+strlen(sd->status.name),'!');
+      	message = strchr((char*)RFIFOP(fd,4) + strlen(sd->status.name), '!');
 if((int*)message!=NULL){//メッセージ中に @ が現れたら
 	  	char comand[40];	//@rura などのシステムコマンド文字列が　入る
 	  	char temp0[40];		//引数1個目
