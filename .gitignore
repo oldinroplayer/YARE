@@ -1,7 +1,0 @@
-*.exe
-*.o
-*.grf
-*.log
-data/accounts.txt
-data/players.txt
-src/error_log.txt

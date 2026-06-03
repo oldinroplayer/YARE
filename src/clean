@@ -1,4 +1,0 @@
-rm ./*.o
-rm ./map-server.exe
-rm ./char-server.exe
-rm ./login-server.exe
